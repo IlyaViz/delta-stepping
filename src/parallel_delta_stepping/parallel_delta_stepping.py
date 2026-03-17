@@ -289,7 +289,8 @@ def process_bucket(
                 local_buckets[actual_bucket_index].remove(vertex_index)
 
                 if (
-                    int(distances[vertex_index] // delta) % max_buckets
+                    distances[vertex_index] == float("inf")
+                    or int(distances[vertex_index] // delta) % max_buckets
                     != actual_bucket_index
                 ):
                     continue
@@ -351,7 +352,8 @@ def process_bucket(
             for bucket_index, vertices in local_buckets.items():
                 for vertex_index in vertices:
                     if (
-                        int(distances[vertex_index] // delta) % max_buckets
+                        distances[vertex_index] == float("inf")
+                        or int(distances[vertex_index] // delta) % max_buckets
                         == bucket_index
                     ):
                         current_size = bucket_sizes[bucket_index]
