@@ -37,7 +37,11 @@ def parallel_delta_stepping(
         shm_list.append(shm_weights)
 
         shm_buckets = shared_memory.SharedMemory(
-            create=True, size=vertices_length * max_buckets * dtype(int64).itemsize
+            create=True,
+            size=vertices_length
+            * max_buckets
+            * processes_count
+            * dtype(int64).itemsize,
         )
         shm_list.append(shm_buckets)
 
@@ -56,7 +60,9 @@ def parallel_delta_stepping(
             (vertices_length, max_degree), dtype=float64, buffer=shm_weights.buf
         )
         shared_buckets = ndarray(
-            (max_buckets, vertices_length), dtype=int64, buffer=shm_buckets.buf
+            (max_buckets, vertices_length * processes_count),
+            dtype=int64,
+            buffer=shm_buckets.buf,
         )
         shared_bucket_sizes = ndarray(
             (max_buckets,), dtype=int64, buffer=shm_buckets_sizes.buf
@@ -119,6 +125,7 @@ def parallel_delta_stepping(
                             vertices_length,
                             max_degree,
                             max_buckets,
+                            processes_count,
                             delta,
                             shm_neighbours.name,
                             shm_distances.name,
@@ -224,6 +231,7 @@ def process_bucket(
     total_vertices: int,
     max_degree: int,
     max_buckets: int,
+    processes_count: int,
     delta: float,
     shm_neighbours_name: str,
     shm_distances_name: str,
@@ -260,7 +268,7 @@ def process_bucket(
             (total_vertices, max_degree), dtype=float64, buffer=existing_shm_weights.buf
         )
         buckets = ndarray(
-            (max_buckets, total_vertices),
+            (max_buckets, total_vertices * processes_count),
             dtype=int64,
             buffer=existing_shm_buckets.buf,
         )
