@@ -1,18 +1,21 @@
-from src.weighted_graph.weighted_graph import WeightedGraph
-from src.weighted_graph.weighted_vertex import WeightedVertex
-from src.weighted_graph.weighted_edge import WeightedEdge
+import random
 
-def generate_weighted_graph(num_vertices: int, num_edges: int, only_positive_weights: bool = True) -> WeightedGraph:
-    vertices = [WeightedVertex(i) for i in range(num_vertices)]
-    edges = []
 
-    for i in range(num_edges):
-        source_index = i % num_vertices
-        target_index = (i + 1) % num_vertices
+def generate_weighted_graph_with_default_types(
+    num_vertices: int, num_edges: int, min_weight: int, max_weight: int
+) -> tuple[list[list[int]], list[list[float]]]:
+    neighbours = [[] for _ in range(num_vertices)]
+    weights = [[] for _ in range(num_vertices)]
 
-        weight = (i + 1) if only_positive_weights else (i - num_edges // 2)
+    for _ in range(num_edges):
+        source = random.randint(0, num_vertices - 1)
+        target = random.randint(0, num_vertices - 1)
 
-        edge = WeightedEdge(vertices[source_index], vertices[target_index], weight)
-        edges.append(edge)
+        while target == source:
+            target = random.randint(0, num_vertices - 1)
 
-    return WeightedGraph(vertices, edges)
+        weight = random.uniform(min_weight, max_weight)
+        neighbours[source].append(target)
+        weights[source].append(weight)
+
+    return neighbours, weights

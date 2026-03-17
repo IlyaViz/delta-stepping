@@ -1,26 +1,25 @@
 import copy
-from src.weighted_graph.weighted_graph import WeightedGraph
-from src.weighted_graph.weighted_vertex import WeightedVertex
-from src.weighted_graph.weighted_edge import WeightedEdge
 
 
 def sequential_delta_stepping(
-    graph: WeightedGraph,
-    source_vertex: WeightedVertex,
+    neighbours: list[list[int]],
+    weights: list[list[float]],
+    source_vertex: int,
     delta: float,
-) -> None:
-    def relax_neighbour(vertex: WeightedVertex, edge: WeightedEdge) -> bool:
-        neighbour_vertex = graph.get_vertex_neighbour_by_edge(vertex, edge)
-        new_distance = vertex.distance + edge.weight
+) -> list[float]:
+    def relax_neighbour(vertex: int, edge_index: int) -> bool:
+        neighbour_vertex = neighbours[vertex][edge_index]
+        new_distance = distances[vertex] + weights[vertex][edge_index]
 
-        if new_distance < neighbour_vertex.distance:
-            neighbour_vertex.distance = new_distance
+        if new_distance < distances[neighbour_vertex]:
+            distances[neighbour_vertex] = new_distance
+
             return True
 
         return False
 
-    def add_to_bucket(vertex: WeightedVertex, buckets: list[set]) -> None:
-        bucket_index = int(vertex.distance // delta)
+    def add_to_bucket(vertex: int, buckets: list[set]) -> None:
+        bucket_index = int(distances[vertex] // delta)
         buckets_length = len(buckets)
 
         for _ in range(bucket_index - buckets_length + 1):
@@ -28,10 +27,10 @@ def sequential_delta_stepping(
 
         buckets[bucket_index].add(vertex)
 
-    for vertex in graph.vertices:
-        vertex.distance = float("inf")
+    vertices_count = len(neighbours)
+    distances = [float("inf")] * vertices_count
 
-    source_vertex.distance = 0
+    distances[source_vertex] = 0
 
     buckets = []
     current_heavy_edges = set()
@@ -45,32 +44,31 @@ def sequential_delta_stepping(
         for vertex in tuple(current_bucket):
             current_bucket.remove(vertex)
 
-            if int(vertex.distance // delta) != current_bucket_index:
+            if int(distances[vertex] // delta) != current_bucket_index:
                 continue
 
-            vertex_edges = graph.get_vertex_edges(vertex)
-
-            for edge in vertex_edges:
-                is_light_edge = edge.weight <= delta
+            for edge_index in range(len(neighbours[vertex])):
+                edge = weights[vertex][edge_index]
+                is_light_edge = edge <= delta
 
                 if not is_light_edge:
-                    current_heavy_edges.add((vertex, edge))
+                    current_heavy_edges.add((vertex, edge_index))
                     continue
 
-                neighbour_vertex = graph.get_vertex_neighbour_by_edge(vertex, edge)
-
-                if relax_neighbour(vertex, edge):
+                if relax_neighbour(vertex, edge_index):
+                    neighbour_vertex = neighbours[vertex][edge_index]
                     add_to_bucket(neighbour_vertex, buckets)
 
         if not current_bucket:
             for heavy_edge in current_heavy_edges:
-                vertex, edge = heavy_edge
+                vertex, edge_index = heavy_edge
 
-                neighbour_vertex = graph.get_vertex_neighbour_by_edge(vertex, edge)
-
-                if relax_neighbour(vertex, edge):
+                if relax_neighbour(vertex, edge_index):
+                    neighbour_vertex = neighbours[vertex][edge_index]
                     add_to_bucket(neighbour_vertex, buckets)
 
             current_heavy_edges.clear()
 
             current_bucket_index += 1
+
+    return distances

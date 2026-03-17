@@ -1,16 +1,16 @@
 import networkx as nx
-from src.weighted_graph.weighted_graph import WeightedGraph
 
 
-def convert_graph_to_networkx(graph: WeightedGraph) -> nx.MultiDiGraph:
+def convert_graph_to_networkx(
+    neighbours: list[list[int]], weights: list[list[float]]
+) -> nx.MultiDiGraph:
     G = nx.MultiDiGraph()
 
-    for vertex in graph.vertices:
-        G.add_node(vertex.id)
+    for i in range(len(neighbours)):
+        G.add_node(i)
 
-    for vertex in graph.vertices:
-        for edge in graph.get_vertex_edges(vertex):
-            neighbour_vertex = graph.get_vertex_neighbour_by_edge(vertex, edge)
-            G.add_edge(vertex.id, neighbour_vertex.id, weight=edge.weight)
+    for i in range(len(neighbours)):
+        for j in range(len(neighbours[i])):
+            G.add_edge(i, neighbours[i][j], weight=weights[i][j])
 
     return G

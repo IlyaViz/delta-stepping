@@ -1,27 +1,22 @@
 import traceback
 from numpy import int64, ndarray, float64, dtype
-from multiprocessing import cpu_count, shared_memory, Manager, Lock, Pool
-from multiprocessing.synchronize import Lock as LockType
-from src.weighted_graph.weighted_graph import WeightedGraph
-from src.weighted_graph.weighted_vertex import WeightedVertex
+from multiprocessing import cpu_count, shared_memory, Lock, Pool
+
+distances_lock_global = None
+buckets_lock_global = None
 
 
 def parallel_delta_stepping(
-    graph: WeightedGraph,
-    source_vertex: WeightedVertex,
+    neighbours: list[list[int]],
+    weights: list[list[float]],
+    source_vertex_index: int,
     delta: float,
     processes_count: int = cpu_count(),
 ) -> None:
     try:
-        vertices_length = len(graph.vertices)
-        max_degree = max(
-            len(graph.get_vertex_edges(vertex)) for vertex in graph.vertices
-        )
-        max_weight = max(
-            edge.weight
-            for vertex in graph.vertices
-            for edge in graph.get_vertex_edges(vertex)
-        )
+        vertices_length = len(neighbours)
+        max_degree = max(len(row) for row in neighbours)
+        max_weight = max(max(row, default=0.0) for row in weights)
         max_buckets = int(max_weight // delta) + 1
 
         shm_list = []
@@ -71,18 +66,16 @@ def parallel_delta_stepping(
         shared_distances.fill(float("inf"))
         shared_bucket_sizes.fill(0)
 
-        source_vertex_index = graph.vertices.index(source_vertex)
         shared_distances[source_vertex_index] = 0.0
 
-        for n, vertex in enumerate(graph.vertices):
-            vertex_edges = graph.get_vertex_edges(vertex)
+        for row in neighbours:
+            row.extend([-1] * (max_degree - len(row)))
 
-            for e, edge in enumerate(vertex_edges):
-                neighbour_vertex = graph.get_vertex_neighbour_by_edge(vertex, edge)
-                neighbour_vertex_index = graph.vertices.index(neighbour_vertex)
+        for row in weights:
+            row.extend([0.0] * (max_degree - len(row)))
 
-                shared_neighbours[n, e] = neighbour_vertex_index
-                shared_weights[n, e] = edge.weight
+        shared_neighbours[:, :] = neighbours
+        shared_weights[:, :] = weights
 
         add_to_bucket(
             delta,
@@ -92,42 +85,73 @@ def parallel_delta_stepping(
             shared_bucket_sizes,
         )
 
-        with Manager() as manager:
-            distances_lock = manager.Lock()
-            buckets_lock = manager.Lock()
+        distances_lock = Lock()
+        buckets_lock = Lock()
 
-            args_template = (
-                processes_count,
-                vertices_length,
-                max_degree,
-                max_buckets,
-                delta,
-                shm_neighbours.name,
-                shm_distances.name,
-                shm_weights.name,
-                shm_buckets.name,
-                shm_buckets_sizes.name,
-                distances_lock,
-                buckets_lock,
+        total_vertices_process = 0
+        steps = 0
+
+        with Pool(
+            processes_count,
+            initializer=init_pool_locks,
+            initargs=(distances_lock, buckets_lock),
+        ) as pool:
+            next_non_empty_bucket_absolute_index = 0
+            next_non_empty_bucket_actual_index = (
+                next_non_empty_bucket_absolute_index % max_buckets
             )
 
-            with Pool(processes_count) as pool:
-                current_bucket_index = 0
+            while next_non_empty_bucket_absolute_index != -1:
+                vertices_in_bucket = shared_bucket_sizes[
+                    next_non_empty_bucket_actual_index
+                ]
+                vertices_per_process = (
+                    vertices_in_bucket + processes_count - 1
+                ) // processes_count
 
-                while any(bucket_size != 0 for bucket_size in shared_bucket_sizes):
-                    actual_bucket_index = current_bucket_index % max_buckets
+                pool.starmap(
+                    process_bucket,
+                    [
+                        (
+                            next_non_empty_bucket_actual_index,
+                            i * vertices_per_process,
+                            min((i + 1) * vertices_per_process, vertices_in_bucket),
+                            vertices_length,
+                            max_degree,
+                            max_buckets,
+                            delta,
+                            shm_neighbours.name,
+                            shm_distances.name,
+                            shm_weights.name,
+                            shm_buckets.name,
+                            shm_buckets_sizes.name,
+                        )
+                        for i in range(processes_count)
+                    ],
+                )
 
-                    if shared_bucket_sizes[actual_bucket_index] > 0:
-                        tasks = [
-                            (current_bucket_index,) + args_template
-                            for _ in range(processes_count)
-                        ]
-                        pool.starmap(process_bucket, tasks)
+                total_vertices_process += vertices_in_bucket
+                steps += 1
 
-                    current_bucket_index += 1
+                shared_bucket_sizes[next_non_empty_bucket_actual_index] = 0
 
-            for n, vertex in enumerate(graph.vertices):
-                vertex.distance = shared_distances[n]
+                for i in range(max_buckets):
+                    absolute_index = next_non_empty_bucket_absolute_index + i
+                    actual_index = absolute_index % max_buckets
+
+                    if shared_bucket_sizes[actual_index] > 0:
+                        next_non_empty_bucket_absolute_index = absolute_index
+                        next_non_empty_bucket_actual_index = actual_index
+                        break
+
+                    next_non_empty_bucket_absolute_index = -1
+
+        print(
+            f"Average vertices per process: {total_vertices_process / steps / processes_count:.2f}"
+        )
+
+        return shared_distances.tolist()
+
     except Exception as e:
         print("An error occurred during parallel delta stepping:")
         traceback.print_exc()
@@ -137,17 +161,28 @@ def parallel_delta_stepping(
             shm.unlink()
 
 
+def init_pool_locks(distances_lock, buckets_lock):
+    global distances_lock_global
+    global buckets_lock_global
+
+    distances_lock_global = distances_lock
+    buckets_lock_global = buckets_lock
+
+
 def relax_neighbour(
     vertex_index: int,
     neighbour_index: int,
     edge_weight: float,
     distances: ndarray[float64],
+    local_distance_updates: dict[int, float],
 ) -> bool:
+    neighbour_distance = local_distance_updates.get(
+        neighbour_index, distances[neighbour_index]
+    )
     new_distance = distances[vertex_index] + edge_weight
 
-    if new_distance < distances[neighbour_index]:
-        distances[neighbour_index] = new_distance
-
+    if new_distance < neighbour_distance:
+        local_distance_updates[neighbour_index] = new_distance
         return True
 
     return False
@@ -172,22 +207,20 @@ def add_to_bucket(
 def add_to_local_bucket(
     delta,
     vertex_index: int,
-    distances: ndarray[float64],
-    local_buckets: list[set[int]],
+    local_distance_updates: dict[int, float],
+    local_buckets: dict[int, set[int]],
     max_local_buckets: int,
 ) -> None:
-    bucket_index = int(distances[vertex_index] // delta) % max_local_buckets
-    buckets_length = len(local_buckets)
-
-    for _ in range(bucket_index - buckets_length + 1):
-        local_buckets.append(set())
-
+    bucket_index = (
+        int(local_distance_updates[vertex_index] // delta) % max_local_buckets
+    )
     local_buckets[bucket_index].add(vertex_index)
 
 
 def process_bucket(
-    absolute_bucket_index: int,
-    total_proccesses: int,
+    actual_bucket_index: int,
+    start_vertex_index: int,
+    end_vertex_index: int,
     total_vertices: int,
     max_degree: int,
     max_buckets: int,
@@ -197,131 +230,128 @@ def process_bucket(
     shm_weights_name: str,
     shm_buckets_name: str,
     shm_bucket_sizes_name: str,
-    distances_lock: LockType,
-    buckets_lock: LockType,
 ) -> None:
-    existing_shm_neighbours = shared_memory.SharedMemory(name=shm_neighbours_name)
-    existing_shm_distances = shared_memory.SharedMemory(name=shm_distances_name)
-    existing_shm_weights = shared_memory.SharedMemory(name=shm_weights_name)
-    existing_shm_buckets = shared_memory.SharedMemory(name=shm_buckets_name)
-    existing_shm_bucket_sizes = shared_memory.SharedMemory(name=shm_bucket_sizes_name)
+    try:
+        existing_shm_neighbours = shared_memory.SharedMemory(name=shm_neighbours_name)
+        existing_shm_distances = shared_memory.SharedMemory(name=shm_distances_name)
+        existing_shm_weights = shared_memory.SharedMemory(name=shm_weights_name)
+        existing_shm_buckets = shared_memory.SharedMemory(name=shm_buckets_name)
+        existing_shm_bucket_sizes = shared_memory.SharedMemory(
+            name=shm_bucket_sizes_name
+        )
 
-    neighbours = ndarray(
-        (total_vertices, max_degree), dtype=int64, buffer=existing_shm_neighbours.buf
-    )
-    distances = ndarray(
-        (total_vertices,), dtype=float64, buffer=existing_shm_distances.buf
-    )
-    weights = ndarray(
-        (total_vertices, max_degree), dtype=float64, buffer=existing_shm_weights.buf
-    )
-    buckets = ndarray(
-        (max_buckets, total_vertices),
-        dtype=int64,
-        buffer=existing_shm_buckets.buf,
-    )
-    bucket_sizes = ndarray(
-        (max_buckets,), dtype=int64, buffer=existing_shm_bucket_sizes.buf
-    )
+        existing_shm_list = [
+            existing_shm_neighbours,
+            existing_shm_distances,
+            existing_shm_weights,
+            existing_shm_buckets,
+            existing_shm_bucket_sizes,
+        ]
 
-    actual_bucket_index = absolute_bucket_index % max_buckets
+        neighbours = ndarray(
+            (total_vertices, max_degree),
+            dtype=int64,
+            buffer=existing_shm_neighbours.buf,
+        )
+        distances = ndarray(
+            (total_vertices,), dtype=float64, buffer=existing_shm_distances.buf
+        )
+        weights = ndarray(
+            (total_vertices, max_degree), dtype=float64, buffer=existing_shm_weights.buf
+        )
+        buckets = ndarray(
+            (max_buckets, total_vertices),
+            dtype=int64,
+            buffer=existing_shm_buckets.buf,
+        )
+        bucket_sizes = ndarray(
+            (max_buckets,), dtype=int64, buffer=existing_shm_bucket_sizes.buf
+        )
 
-    vertices_per_process = max(1, total_vertices // total_proccesses)
-    local_buckets = []
-    local_distances = distances.copy()
-    local_heavy_edges = set()
-    local_vertices_to_process_set = set()
-    processing = True
+        local_buckets = {i: set() for i in range(max_buckets)}
+        local_distance_updates = {}
+        local_heavy_edges = set()
+        vertices_to_process = buckets[
+            actual_bucket_index, start_vertex_index:end_vertex_index
+        ]
+        local_buckets[actual_bucket_index] = set(vertices_to_process)
 
-    while processing:
-        local_vertices_to_process_set_length = len(local_vertices_to_process_set)
+        while local_vertices_to_process := local_buckets[actual_bucket_index]:
+            for vertex_index in set(local_vertices_to_process):
+                local_buckets[actual_bucket_index].remove(vertex_index)
 
-        if local_vertices_to_process_set_length < vertices_per_process:
-            additional_vertices_to_process_count = (
-                vertices_per_process - local_vertices_to_process_set_length
-            )
-
-            extra_vertices_to_process = []
-
-            with buckets_lock:
-                available_extra_vertices = bucket_sizes[actual_bucket_index]
-                extra_vertices_to_process_count = min(
-                    additional_vertices_to_process_count, available_extra_vertices
-                )
-
-                if extra_vertices_to_process_count > 0:
-                    start_index = (
-                        available_extra_vertices - extra_vertices_to_process_count
-                    )
-
-                    extra_vertices_to_process = buckets[
-                        actual_bucket_index,
-                        start_index:available_extra_vertices,
-                    ]
-
-                    local_vertices_to_process_set.update(extra_vertices_to_process)
-
-                    bucket_sizes[
-                        actual_bucket_index
-                    ] -= extra_vertices_to_process_count
-
-        if not local_vertices_to_process_set:
-            processing = False
-            continue
-
-        for vertex_index in local_vertices_to_process_set:
-            if int(local_distances[vertex_index] // delta) != absolute_bucket_index:
-                continue
-
-            vertex_neighbour_indexes = neighbours[vertex_index]
-
-            for i in range(max_degree):
-                neighbour_index = vertex_neighbour_indexes[i]
-
-                if neighbour_index == -1:
-                    break
-
-                edge_weight = weights[vertex_index, i]
-                is_light_edge = edge_weight <= delta
-
-                if not is_light_edge:
-                    local_heavy_edges.add((vertex_index, neighbour_index, edge_weight))
+                if (
+                    int(distances[vertex_index] // delta) % max_buckets
+                    != actual_bucket_index
+                ):
                     continue
 
-                if relax_neighbour(
-                    vertex_index, neighbour_index, edge_weight, local_distances
-                ):
-                    add_to_local_bucket(
-                        delta,
+                vertex_neighbour_indexes = neighbours[vertex_index]
+
+                for i in range(max_degree):
+                    neighbour_index = vertex_neighbour_indexes[i]
+
+                    if neighbour_index == -1:
+                        break
+
+                    edge_weight = weights[vertex_index, i]
+                    is_light_edge = edge_weight <= delta
+
+                    if not is_light_edge:
+                        local_heavy_edges.add(
+                            (vertex_index, neighbour_index, edge_weight)
+                        )
+                        continue
+
+                    if relax_neighbour(
+                        vertex_index,
                         neighbour_index,
-                        local_distances,
-                        local_buckets,
-                        max_buckets,
-                    )
+                        edge_weight,
+                        distances,
+                        local_distance_updates,
+                    ):
+                        add_to_local_bucket(
+                            delta,
+                            neighbour_index,
+                            local_distance_updates,
+                            local_buckets,
+                            max_buckets,
+                        )
 
-        local_vertices_to_process_set.clear()
+        for vertex_index, neighbour_index, edge_weight in local_heavy_edges:
+            if relax_neighbour(
+                vertex_index,
+                neighbour_index,
+                edge_weight,
+                distances,
+                local_distance_updates,
+            ):
+                add_to_local_bucket(
+                    delta,
+                    neighbour_index,
+                    local_distance_updates,
+                    local_buckets,
+                    max_buckets,
+                )
 
-        if actual_bucket_index < len(local_buckets):
-            for vertex_index in local_buckets[actual_bucket_index]:
-                local_vertices_to_process_set.add(vertex_index)
+        with distances_lock_global:
+            for vertex_index, new_distance in local_distance_updates.items():
+                if new_distance < distances[vertex_index]:
+                    distances[vertex_index] = new_distance
 
-            local_buckets[actual_bucket_index].clear()
-
-    for vertex_index, neighbour_index, edge_weight in local_heavy_edges:
-        if relax_neighbour(vertex_index, neighbour_index, edge_weight, local_distances):
-            add_to_local_bucket(
-                delta, neighbour_index, local_distances, local_buckets, max_buckets
-            )
-
-    with distances_lock:
-        for vertex_index in range(total_vertices):
-            if local_distances[vertex_index] < distances[vertex_index]:
-                distances[vertex_index] = local_distances[vertex_index]
-
-    with buckets_lock:
-        for bucket_index, bucket in enumerate(local_buckets):
-            for vertex_index in bucket:
-                current_size = bucket_sizes[bucket_index]
-                buckets[bucket_index, current_size] = vertex_index
-
-                bucket_sizes[bucket_index] += 1
+        with buckets_lock_global:
+            for bucket_index, vertices in local_buckets.items():
+                for vertex_index in vertices:
+                    if (
+                        int(distances[vertex_index] // delta) % max_buckets
+                        == bucket_index
+                    ):
+                        current_size = bucket_sizes[bucket_index]
+                        buckets[bucket_index, current_size] = vertex_index
+                        bucket_sizes[bucket_index] += 1
+    except Exception as e:
+        print("An error occurred during bucket processing:")
+        traceback.print_exc()
+    finally:
+        for shm in existing_shm_list:
+            shm.close()
