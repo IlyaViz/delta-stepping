@@ -1,0 +1,98 @@
+import time
+import matplotlib.pyplot as plt
+from colorama import Fore, Style
+from src.parallel_delta_stepping.parallel_delta_stepping import parallel_delta_stepping
+from src.sequential_delta_stepping.sequential_delta_stepping import (
+    sequential_delta_stepping,
+)
+from src.generator.weighted_graph_generator import (
+    generate_weighted_graph_with_default_types,
+)
+
+
+def perform_delta_stepping_analysis(
+    vertex_options: list[int],
+    edge_ratio_options: list[float],
+    deltas: list[float],
+    cpu_count: list[int],
+    output_folder: str,
+    min_weight: int = 1,
+    max_weight: int = 100,
+    retries: int = 3,
+) -> None:
+    step_count = (
+        len(vertex_options) * len(edge_ratio_options) * len(deltas) * len(cpu_count)
+    )
+    step = 0
+
+    for delta in deltas:
+        fig, axes = plt.subplots(len(vertex_options), 2, figsize=(15, 10))
+
+        for vertex_index, vertex_count in enumerate(vertex_options):
+            for cpus in cpu_count:
+                cpus_speedup_results = []
+                cpus_efficiency_results = []
+
+                for edge_ratio in edge_ratio_options:
+                    step += 1
+                    print(
+                        f"{Fore.GREEN}Step {step}/{step_count} started{Style.RESET_ALL}"
+                    )
+
+                    neighbours, weights = generate_weighted_graph_with_default_types(
+                        vertex_count,
+                        int(vertex_count * edge_ratio),
+                        min_weight,
+                        max_weight,
+                    )
+
+                    total_sequential_time = 0
+                    total_parallel_time = 0
+
+                    for _ in range(retries):
+                        start = time.time()
+                        sequential_delta_stepping(neighbours, weights, 0, delta)
+                        end = time.time()
+                        total_sequential_time += end - start
+
+                        start = time.time()
+                        parallel_delta_stepping(neighbours, weights, 0, delta, cpus)
+                        end = time.time()
+                        total_parallel_time += end - start
+
+                    average_sequential_time = total_sequential_time / retries
+                    average_parallel_time = total_parallel_time / retries
+
+                    speedup = average_sequential_time / average_parallel_time
+                    efficiency = speedup / cpus
+
+                    cpus_speedup_results.append(speedup)
+                    cpus_efficiency_results.append(efficiency)
+
+                axes[vertex_index][0].plot(
+                    edge_ratio_options,
+                    cpus_speedup_results,
+                    marker="o",
+                    label=f"{cpus} CPUs",
+                )
+                axes[vertex_index][0].set_title(f"Speedup for {vertex_count} vertices")
+                axes[vertex_index][0].set_xlabel("Edge Ratio")
+                axes[vertex_index][0].set_ylabel("Speedup")
+                axes[vertex_index][0].legend()
+
+                axes[vertex_index][1].plot(
+                    edge_ratio_options,
+                    cpus_efficiency_results,
+                    marker="o",
+                    label=f"{cpus} CPUs",
+                )
+                axes[vertex_index][1].set_title(
+                    f"Efficiency for {vertex_count} vertices"
+                )
+                axes[vertex_index][1].set_xlabel("Edge Ratio")
+                axes[vertex_index][1].set_ylabel("Efficiency")
+                axes[vertex_index][1].legend()
+
+        fig.suptitle(f"Delta: {delta}")
+        plt.tight_layout()
+        plt.savefig(f"{output_folder}/delta_{delta}_analysis.png")
