@@ -20,6 +20,8 @@ def perform_delta_stepping_analysis(
     max_weight: int = 100,
     retries: int = 3,
 ) -> None:
+    analysis_start = time.time()
+
     step_count = (
         len(vertex_options) * len(edge_ratio_options) * len(deltas) * len(cpu_count)
     )
@@ -51,14 +53,31 @@ def perform_delta_stepping_analysis(
 
                     for _ in range(retries):
                         start = time.time()
-                        sequential_delta_stepping(neighbours, weights, 0, delta)
+                        sequential_distances = sequential_delta_stepping(
+                            neighbours, weights, 0, delta
+                        )
                         end = time.time()
                         total_sequential_time += end - start
 
                         start = time.time()
-                        parallel_delta_stepping(neighbours, weights, 0, delta, cpus)
+                        parallel_distanaces = parallel_delta_stepping(
+                            neighbours, weights, 0, delta, cpus
+                        )
                         end = time.time()
                         total_parallel_time += end - start
+
+                        for vertex in range(vertex_count):
+                            if (
+                                sequential_distances[vertex]
+                                != parallel_distanaces[vertex]
+                            ):
+                                with open(f"{output_folder}/summury.txt", "a") as f:
+                                    f.write(
+                                        f"Distances do not match for vertex {vertex} in graph with {vertex_count} vertices and edge ratio {edge_ratio}\n"
+                                    )
+                                raise ValueError(
+                                    f"Distances do not match for vertex {vertex} in graph with {vertex_count} vertices and edge ratio {edge_ratio}"
+                                )
 
                     average_sequential_time = total_sequential_time / retries
                     average_parallel_time = total_parallel_time / retries
@@ -96,3 +115,9 @@ def perform_delta_stepping_analysis(
         fig.suptitle(f"Delta: {delta}")
         plt.tight_layout()
         plt.savefig(f"{output_folder}/delta_{delta}_analysis.png")
+
+    analysis_end = time.time()
+
+    with open(f"{output_folder}/summary.txt", "w") as f:
+        f.write(f"Delta Stepping Analysis Summary\n")
+        f.write(f"Total analysis time: {analysis_end - analysis_start:.2f} seconds\n")
