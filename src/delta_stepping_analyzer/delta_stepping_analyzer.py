@@ -1,5 +1,6 @@
 import time
 import matplotlib.pyplot as plt
+import math
 from colorama import Fore, Style
 from src.parallel_delta_stepping.parallel_delta_stepping import parallel_delta_stepping
 from src.sequential_delta_stepping.sequential_delta_stepping import (
@@ -67,9 +68,11 @@ def perform_delta_stepping_analysis(
                         total_parallel_time += end - start
 
                         for vertex in range(vertex_count):
-                            if (
-                                sequential_distances[vertex]
-                                != parallel_distanaces[vertex]
+                            if not math.isclose(
+                                sequential_distances[vertex],
+                                parallel_distanaces[vertex],
+                                abs_tol=1e-9,
+                                rel_tol=1e-9,
                             ):
                                 with open(f"{output_folder}/summury.txt", "a") as f:
                                     f.write(

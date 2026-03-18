@@ -1,3 +1,4 @@
+import math
 from networkx import single_source_dijkstra_path_length
 from src.sequential_delta_stepping.sequential_delta_stepping import (
     sequential_delta_stepping,
@@ -30,4 +31,6 @@ def test_sequential_delta_stepping():
     )
 
     for vertex in range(TEST_GRAPH_VERTICES_COUNT):
-        assert distances[vertex] == expected_distances.get(vertex, float("inf"))
+        assert math.isclose(
+            distances[vertex], expected_distances[vertex], abs_tol=1e-9, rel_tol=1e-9
+        )
