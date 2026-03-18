@@ -74,7 +74,7 @@ def perform_delta_stepping_analysis(
                                 abs_tol=1e-9,
                                 rel_tol=1e-9,
                             ):
-                                with open(f"{output_folder}/summury.txt", "a") as f:
+                                with open(f"{output_folder}/summary.txt", "w") as f:
                                     f.write(
                                         f"Distances do not match for vertex {vertex} in graph with {vertex_count} vertices and edge ratio {edge_ratio}\n"
                                     )
