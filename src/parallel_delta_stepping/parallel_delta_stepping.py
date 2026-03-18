@@ -1,3 +1,4 @@
+from copy import deepcopy
 from atexit import register
 from traceback import print_exc
 from numpy import int64, ndarray, float64, dtype
@@ -87,14 +88,11 @@ def parallel_delta_stepping(
 
         shared_distances[source_vertex_index] = 0.0
 
-        for row in neighbours:
-            row.extend([-1] * (max_degree - len(row)))
+        padded_neighbours = [row + [-1] * (max_degree - len(row)) for row in neighbours]
+        padded_weights = [row + [0.0] * (max_degree - len(row)) for row in weights]
 
-        for row in weights:
-            row.extend([0.0] * (max_degree - len(row)))
-
-        shared_neighbours[:, :] = neighbours
-        shared_weights[:, :] = weights
+        shared_neighbours[:, :] = padded_neighbours
+        shared_weights[:, :] = padded_weights
 
         add_to_bucket(
             delta,
@@ -160,16 +158,17 @@ def parallel_delta_stepping(
 
                 shared_bucket_sizes[next_non_empty_bucket_actual_index] = 0
 
+                current_absolute_index = next_non_empty_bucket_absolute_index
+                next_non_empty_bucket_absolute_index = -1
+
                 for i in range(max_buckets):
-                    absolute_index = next_non_empty_bucket_absolute_index + i
+                    absolute_index = current_absolute_index + i
                     actual_index = absolute_index % max_buckets
 
                     if shared_bucket_sizes[actual_index] > 0:
                         next_non_empty_bucket_absolute_index = absolute_index
                         next_non_empty_bucket_actual_index = actual_index
                         break
-
-                    next_non_empty_bucket_absolute_index = -1
 
         print(
             f"Average vertices per process: {total_vertices_process / steps / processes_count:.2f}"
@@ -288,10 +287,13 @@ def process_bucket(
         for vertex_index in set(local_vertices_to_process):
             local_buckets[actual_bucket_index].remove(vertex_index)
 
+            current_dist = local_distance_updates.get(
+                vertex_index, distances_global[vertex_index]
+            )
+
             if (
-                distances_global[vertex_index] == float("inf")
-                or int(distances_global[vertex_index] // delta) % max_buckets
-                != actual_bucket_index
+                current_dist == float("inf")
+                or int(current_dist // delta) % max_buckets != actual_bucket_index
             ):
                 continue
 
@@ -366,10 +368,11 @@ def relax_neighbour(
     distances: ndarray[float64],
     local_distance_updates: dict[int, float],
 ) -> bool:
+    vertex_distance = local_distance_updates.get(vertex_index, distances[vertex_index])
     neighbour_distance = local_distance_updates.get(
         neighbour_index, distances[neighbour_index]
     )
-    new_distance = distances[vertex_index] + edge_weight
+    new_distance = vertex_distance + edge_weight
 
     if new_distance < neighbour_distance:
         local_distance_updates[neighbour_index] = new_distance
