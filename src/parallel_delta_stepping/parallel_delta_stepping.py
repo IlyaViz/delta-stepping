@@ -31,7 +31,7 @@ def parallel_delta_stepping(
         vertices_length = len(neighbours)
         max_degree = max(len(row) for row in neighbours)
         max_weight = max(max(row, default=0.0) for row in weights)
-        max_buckets = int(max_weight // delta) + 1
+        max_buckets = int(max_weight // delta) + 2
 
         shm_list = []
 
