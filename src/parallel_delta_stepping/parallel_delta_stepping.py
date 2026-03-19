@@ -24,13 +24,19 @@ def parallel_delta_stepping(
     neighbours: list[list[int]],
     weights: list[list[float]],
     source_vertex_index: int,
-    delta: float,
+    delta: float = -1,
     processes_count: int = cpu_count(),
 ) -> None:
     try:
         vertices_length = len(neighbours)
         max_degree = max(len(row) for row in neighbours)
-        max_weight = max(max(row, default=0.0) for row in weights)
+        weights = [weight for sublist in weights for weight in sublist]
+
+        if delta == -1:
+            avg_weight = sum(weights) / len(weights)
+            delta = avg_weight / 50
+
+        max_weight = max(weights)
         max_buckets = int(max_weight // delta) + 2
 
         shm_list = []

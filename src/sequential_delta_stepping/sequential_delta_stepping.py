@@ -5,7 +5,7 @@ def sequential_delta_stepping(
     neighbours: list[list[int]],
     weights: list[list[float]],
     source_vertex: int,
-    delta: float,
+    delta: float = -1,
 ) -> list[float]:
     def relax_neighbour(vertex: int, edge_index: int) -> bool:
         neighbour_vertex = neighbours[vertex][edge_index]
@@ -26,6 +26,12 @@ def sequential_delta_stepping(
             buckets.append(set())
 
         buckets[bucket_index].add(vertex)
+
+    weights = [weight for sublist in weights for weight in sublist]
+    avg_weight = sum(weights) / len(weights)
+
+    if delta == -1:
+        delta = avg_weight / 50
 
     vertices_count = len(neighbours)
     distances = [float("inf")] * vertices_count
