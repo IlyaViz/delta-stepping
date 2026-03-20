@@ -30,13 +30,13 @@ def parallel_delta_stepping(
     try:
         vertices_length = len(neighbours)
         max_degree = max(len(row) for row in neighbours)
-        weights = [weight for sublist in weights for weight in sublist]
+        flattened_weights = [weight for sublist in weights for weight in sublist]
 
         if delta == -1:
-            avg_weight = sum(weights) / len(weights)
+            avg_weight = sum(flattened_weights) / len(flattened_weights)
             delta = avg_weight / 50
 
-        max_weight = max(weights)
+        max_weight = max(flattened_weights)
         max_buckets = int(max_weight // delta) + 2
 
         shm_list = []

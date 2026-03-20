@@ -27,8 +27,8 @@ def sequential_delta_stepping(
 
         buckets[bucket_index].add(vertex)
 
-    weights = [weight for sublist in weights for weight in sublist]
-    avg_weight = sum(weights) / len(weights)
+    flattened_weights = [weight for sublist in weights for weight in sublist]
+    avg_weight = sum(flattened_weights) / len(flattened_weights)
 
     if delta == -1:
         delta = avg_weight / 50
