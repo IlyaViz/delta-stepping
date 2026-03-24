@@ -116,7 +116,7 @@ def parallel_delta_stepping(
 
         with Pool(
             processes_count,
-            initializer=init_pool_locks,
+            initializer=init_process,
             initargs=(
                 distances_lock,
                 buckets_lock,
@@ -191,7 +191,7 @@ def parallel_delta_stepping(
             shm.unlink()
 
 
-def init_pool_locks(
+def init_process(
     distances_lock,
     buckets_lock,
     shm_neighbours,
