@@ -1,4 +1,3 @@
-from copy import deepcopy
 from atexit import register
 from traceback import print_exc
 from numpy import int64, ndarray, float64, dtype
