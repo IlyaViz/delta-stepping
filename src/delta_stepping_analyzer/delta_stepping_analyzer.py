@@ -95,7 +95,7 @@ def perform_delta_stepping_analysis(
                     edge_ratio_options,
                     cpus_speedup_results,
                     marker="o",
-                    label=f"{cpus} CPUs",
+                    label=f"{cpus} Threads",
                 )
                 axes[vertex_index][0].set_title(f"Speedup for {vertex_count} vertices")
                 axes[vertex_index][0].set_xlabel("Edge Ratio")
