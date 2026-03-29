@@ -2,6 +2,8 @@ from atexit import register
 from traceback import print_exc
 from numpy import int64, ndarray, float64, dtype
 from multiprocessing import cpu_count, shared_memory, Lock, Pool
+from src.utils.delta_stepping_params_validator import validate_delta_stepping_params
+
 
 distances_lock_global = None
 buckets_lock_global = None
@@ -28,18 +30,23 @@ def parallel_delta_stepping(
     delta: float = -1,
     processes_count: int = cpu_count(),
 ) -> None:
+    if processes_count <= 0:
+        raise ValueError("Processes count must be a positive integer.")
+
+    validate_delta_stepping_params(neighbours, weights, source_vertex_index, delta)
+
+    vertices_length = len(neighbours)
+    max_degree = max(len(row) for row in neighbours)
+    flattened_weights = [weight for sublist in weights for weight in sublist]
+
+    if delta == -1:
+        avg_weight = sum(flattened_weights) / len(flattened_weights)
+        delta = avg_weight / 50
+
+    max_weight = max(flattened_weights)
+    max_buckets = int(max_weight // delta) + 2
+
     try:
-        vertices_length = len(neighbours)
-        max_degree = max(len(row) for row in neighbours)
-        flattened_weights = [weight for sublist in weights for weight in sublist]
-
-        if delta == -1:
-            avg_weight = sum(flattened_weights) / len(flattened_weights)
-            delta = avg_weight / 50
-
-        max_weight = max(flattened_weights)
-        max_buckets = int(max_weight // delta) + 2
-
         shm_list = []
 
         shm_neighbours = shared_memory.SharedMemory(

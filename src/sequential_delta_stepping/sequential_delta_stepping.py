@@ -1,9 +1,16 @@
+from src.utils.delta_stepping_params_validator import (
+    validate_delta_stepping_params,
+)
+
+
 def sequential_delta_stepping(
     neighbours: list[list[int]],
     weights: list[list[float]],
     source_vertex: int,
     delta: float = -1,
 ) -> list[float]:
+    validate_delta_stepping_params(neighbours, weights, source_vertex, delta)
+
     def relax_neighbour(vertex: int, edge_index: int) -> bool:
         neighbour_vertex = neighbours[vertex][edge_index]
         new_distance = distances[vertex] + weights[vertex][edge_index]
