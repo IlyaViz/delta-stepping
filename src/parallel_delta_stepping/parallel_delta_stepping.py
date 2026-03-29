@@ -1,9 +1,12 @@
+import math
 from atexit import register
 from traceback import print_exc
 from numpy import int64, ndarray, float64, dtype
 from multiprocessing import cpu_count, shared_memory, Lock, Pool
 from src.utils.delta_stepping_params_validator import validate_delta_stepping_params
 
+
+MIN_VERTICES_PER_PROCESS = 25
 
 distances_lock_global = None
 buckets_lock_global = None
@@ -124,8 +127,7 @@ def parallel_delta_stepping(
         distances_lock = Lock()
         buckets_lock = Lock()
 
-        total_vertices_process = 0
-        steps = 0
+        total_proccesses_used = 0
 
         with Pool(
             processes_count,
@@ -153,9 +155,14 @@ def parallel_delta_stepping(
                 vertices_in_bucket = shared_bucket_sizes[
                     next_non_empty_bucket_actual_index
                 ]
-                vertices_per_process = (
-                    vertices_in_bucket + processes_count - 1
-                ) // processes_count
+                vertices_per_process = max(
+                    MIN_VERTICES_PER_PROCESS, vertices_in_bucket // processes_count
+                )
+                possible_processes_count = math.ceil(
+                    vertices_in_bucket / vertices_per_process
+                )
+
+                total_proccesses_used += possible_processes_count
 
                 pool.starmap(
                     process_bucket,
@@ -168,12 +175,9 @@ def parallel_delta_stepping(
                             max_buckets,
                             delta,
                         )
-                        for i in range(processes_count)
+                        for i in range(possible_processes_count)
                     ],
                 )
-
-                total_vertices_process += vertices_in_bucket
-                steps += 1
 
                 for i in range(vertices_in_bucket):
                     vertex_index = shared_buckets[next_non_empty_bucket_actual_index, i]
@@ -195,9 +199,7 @@ def parallel_delta_stepping(
                         next_non_empty_bucket_actual_index = actual_index
                         break
 
-        print(
-            f"Average vertices per process: {total_vertices_process / steps / processes_count:.2f}"
-        )
+        print(f"Total processes used: {total_proccesses_used}")
 
         return shared_distances.tolist()
 
@@ -307,7 +309,7 @@ def process_bucket(
     max_buckets: int,
     delta: float,
 ) -> None:
-    local_buckets = {i: set() for i in range(max_buckets)}
+    local_buckets = {}
     local_distance_updates = {}
     local_heavy_edges = set()
     vertices_to_process = buckets_global[
@@ -316,8 +318,8 @@ def process_bucket(
     local_buckets[actual_bucket_index] = set(vertices_to_process)
 
     while local_vertices_to_process := local_buckets[actual_bucket_index]:
-        for vertex_index in set(local_vertices_to_process):
-            local_buckets[actual_bucket_index].remove(vertex_index)
+        while local_vertices_to_process:
+            vertex_index = local_vertices_to_process.pop()
 
             current_dist = local_distance_updates.get(
                 vertex_index, distances_global[vertex_index]
@@ -433,7 +435,7 @@ def add_to_bucket(
 
 
 def add_to_local_bucket(
-    delta,
+    delta: float,
     vertex_index: int,
     local_distance_updates: dict[int, float],
     local_buckets: dict[int, set[int]],
@@ -442,4 +444,5 @@ def add_to_local_bucket(
     bucket_index = (
         int(local_distance_updates[vertex_index] // delta) % max_local_buckets
     )
-    local_buckets[bucket_index].add(vertex_index)
+    local_bucket = local_buckets.setdefault(bucket_index, set())
+    local_bucket.add(vertex_index)
