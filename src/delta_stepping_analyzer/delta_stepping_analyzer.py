@@ -9,6 +9,7 @@ from src.sequential_delta_stepping.sequential_delta_stepping import (
 from src.generator.weighted_graph_generator import (
     generate_weighted_graph_with_default_types,
 )
+from src.const.type_error import ABS_TOL, REL_TOL
 
 
 def perform_delta_stepping_analysis(
@@ -71,8 +72,8 @@ def perform_delta_stepping_analysis(
                             if not math.isclose(
                                 sequential_distances[vertex],
                                 parallel_distanaces[vertex],
-                                abs_tol=1e-9,
-                                rel_tol=1e-9,
+                                abs_tol=ABS_TOL,
+                                rel_tol=REL_TOL,
                             ):
                                 with open(f"{output_folder}/summary.txt", "w") as f:
                                     f.write(

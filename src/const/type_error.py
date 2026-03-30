@@ -1,0 +1,2 @@
+ABS_TOL = 1e-6
+REL_TOL = 1e-6

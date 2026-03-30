@@ -1,12 +1,15 @@
 import math
 from atexit import register
 from traceback import print_exc
-from numpy import int64, ndarray, float64, dtype
+from numpy import ndarray, int32, float32, dtype
 from multiprocessing import cpu_count, shared_memory, Lock, Pool
 from src.utils.delta_stepping_params_validator import validate_delta_stepping_params
 
 
 MIN_VERTICES_PER_PROCESS = 25
+INT_DTYPE = dtype(int32)
+FLOAT_DTYPE = dtype(float32)
+
 
 distances_lock_global = None
 buckets_lock_global = None
@@ -53,23 +56,23 @@ def parallel_delta_stepping(
         shm_list = []
 
         shm_neighbours = shared_memory.SharedMemory(
-            create=True, size=vertices_length * max_degree * dtype(int64).itemsize
+            create=True, size=vertices_length * max_degree * INT_DTYPE.itemsize
         )
         shm_list.append(shm_neighbours)
 
         shm_distances = shared_memory.SharedMemory(
-            create=True, size=vertices_length * dtype(float64).itemsize
+            create=True, size=vertices_length * FLOAT_DTYPE.itemsize
         )
         shm_list.append(shm_distances)
 
         shm_weights = shared_memory.SharedMemory(
-            create=True, size=vertices_length * max_degree * dtype(float64).itemsize
+            create=True, size=vertices_length * max_degree * FLOAT_DTYPE.itemsize
         )
         shm_list.append(shm_weights)
 
         shm_buckets = shared_memory.SharedMemory(
             create=True,
-            size=vertices_length * max_buckets * dtype(int64).itemsize,
+            size=vertices_length * max_buckets * INT_DTYPE.itemsize,
         )
         shm_list.append(shm_buckets)
 
@@ -79,29 +82,29 @@ def parallel_delta_stepping(
         shm_list.append(shm_in_bucket)
 
         shm_buckets_sizes = shared_memory.SharedMemory(
-            create=True, size=max_buckets * dtype(int64).itemsize
+            create=True, size=max_buckets * INT_DTYPE.itemsize
         )
         shm_list.append(shm_buckets_sizes)
 
         shared_neighbours = ndarray(
-            (vertices_length, max_degree), dtype=int64, buffer=shm_neighbours.buf
+            (vertices_length, max_degree), dtype=INT_DTYPE, buffer=shm_neighbours.buf
         )
         shared_distances = ndarray(
-            (vertices_length,), dtype=float64, buffer=shm_distances.buf
+            (vertices_length,), dtype=FLOAT_DTYPE, buffer=shm_distances.buf
         )
         shared_weights = ndarray(
-            (vertices_length, max_degree), dtype=float64, buffer=shm_weights.buf
+            (vertices_length, max_degree), dtype=FLOAT_DTYPE, buffer=shm_weights.buf
         )
         shared_buckets = ndarray(
             (max_buckets, vertices_length),
-            dtype=int64,
+            dtype=INT_DTYPE,
             buffer=shm_buckets.buf,
         )
         shared_in_bucket = ndarray(
             (max_buckets, vertices_length), dtype=bool, buffer=shm_in_bucket.buf
         )
         shared_bucket_sizes = ndarray(
-            (max_buckets,), dtype=int64, buffer=shm_buckets_sizes.buf
+            (max_buckets,), dtype=INT_DTYPE, buffer=shm_buckets_sizes.buf
         )
 
         shared_neighbours.fill(-1)
@@ -247,20 +250,20 @@ def init_process(
 
     neighbours_global = ndarray(
         (vertices_length, max_degree),
-        dtype=int64,
+        dtype=INT_DTYPE,
         buffer=existing_shm_neighbours.buf,
     )
     distances_global = ndarray(
-        (vertices_length,), dtype=float64, buffer=existing_shm_distances.buf
+        (vertices_length,), dtype=FLOAT_DTYPE, buffer=existing_shm_distances.buf
     )
     weights_global = ndarray(
         (vertices_length, max_degree),
-        dtype=float64,
+        dtype=FLOAT_DTYPE,
         buffer=existing_shm_weights.buf,
     )
     buckets_global = ndarray(
         (max_buckets, vertices_length),
-        dtype=int64,
+        dtype=INT_DTYPE,
         buffer=existing_shm_buckets.buf,
     )
     in_bucket_global = ndarray(
@@ -268,7 +271,7 @@ def init_process(
     )
     bucket_sizes_global = ndarray(
         (max_buckets,),
-        dtype=int64,
+        dtype=INT_DTYPE,
         buffer=existing_shm_bucket_sizes.buf,
     )
 
@@ -396,7 +399,7 @@ def relax_neighbour(
     vertex_index: int,
     neighbour_index: int,
     edge_weight: float,
-    distances: ndarray[float64],
+    distances: ndarray[FLOAT_DTYPE],
     local_distance_updates: dict[int, float],
 ) -> bool:
     vertex_distance = local_distance_updates.get(vertex_index, distances[vertex_index])
@@ -415,9 +418,9 @@ def relax_neighbour(
 def add_to_bucket(
     delta,
     vertex: int,
-    distances: ndarray[float64],
-    buckets: ndarray[int64],
-    bucket_sizes: ndarray[int64],
+    distances: ndarray[FLOAT_DTYPE],
+    buckets: ndarray[INT_DTYPE],
+    bucket_sizes: ndarray[INT_DTYPE],
 ) -> None:
     max_buckets = len(bucket_sizes)
     bucket_index = int(distances[vertex] // delta) % max_buckets
