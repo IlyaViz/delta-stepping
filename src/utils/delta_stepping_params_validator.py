@@ -4,6 +4,9 @@ def validate_delta_stepping_params(
     source_vertex: int,
     delta: float,
 ) -> None:
+    if len(neighbours) <= 1:
+        raise ValueError("Graph must have at least 2 vertices.")
+
     if len(neighbours) != len(weights):
         raise ValueError("Neighbours and weights must have the same length.")
 

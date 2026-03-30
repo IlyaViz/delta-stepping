@@ -4,6 +4,15 @@ from src.utils.delta_stepping_params_validator import (
 )
 
 
+def test_validate_incorrect_neighbours_length(test_graph):
+    neighbours, weights, _ = test_graph
+
+    neighbours = []
+
+    with pytest.raises(ValueError, match="Graph must have at least 2 vertices."):
+        validate_delta_stepping_params(neighbours, weights, 0, 1)
+
+
 def test_validate_incorrect_neighbours(test_graph):
     neighbours, weights, _ = test_graph
 
