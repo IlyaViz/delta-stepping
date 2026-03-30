@@ -127,7 +127,7 @@ def parallel_delta_stepping(
         distances_lock = Lock()
         buckets_lock = Lock()
 
-        total_proccesses_used = 0
+        total_extra_processes_used = 0
 
         with Pool(
             processes_count,
@@ -162,7 +162,7 @@ def parallel_delta_stepping(
                     vertices_in_bucket / vertices_per_process
                 )
 
-                total_proccesses_used += possible_processes_count
+                total_extra_processes_used += possible_processes_count - 1
 
                 pool.starmap(
                     process_bucket,
@@ -199,7 +199,7 @@ def parallel_delta_stepping(
                         next_non_empty_bucket_actual_index = actual_index
                         break
 
-        print(f"Total processes used: {total_proccesses_used}")
+        print(f"Total extra processes used: {total_extra_processes_used}")
 
         return shared_distances.tolist()
 
