@@ -86,6 +86,18 @@ def perform_delta_stepping_analysis(
                     average_sequential_time = total_sequential_time / retries
                     average_parallel_time = total_parallel_time / retries
 
+                    with open(f"{output_folder}/summary.txt", "a") as f:
+                        f.write(
+                            f"Vertex Count: {vertex_count}, Edge Ratio: {edge_ratio}, Delta: {delta}, CPUs: {cpus}\n"
+                        )
+                        f.write(
+                            f"Average Sequential Time: {average_sequential_time:.4f} seconds\n"
+                        )
+                        f.write(
+                            f"Average Parallel Time: {average_parallel_time:.4f} seconds\n"
+                        )
+                        f.write("\n")
+
                     speedup = average_sequential_time / average_parallel_time
                     efficiency = speedup / cpus
 
@@ -122,6 +134,6 @@ def perform_delta_stepping_analysis(
 
     analysis_end = time.time()
 
-    with open(f"{output_folder}/summary.txt", "w") as f:
+    with open(f"{output_folder}/summary.txt", "a") as f:
         f.write(f"Delta Stepping Analysis Summary\n")
         f.write(f"Total analysis time: {analysis_end - analysis_start:.2f} seconds\n")
