@@ -36,6 +36,7 @@ def sequential_delta_stepping(
         distances,
         buckets,
         bucket_sizes,
+        max_buckets,
     )
 
     next_non_empty_bucket_absolute_index = 0
@@ -55,8 +56,6 @@ def sequential_delta_stepping(
             buckets,
             bucket_sizes,
         )
-
-        bucket_sizes[next_non_empty_bucket_actual_index] = 0
 
         current_absolute_index = next_non_empty_bucket_absolute_index
         next_non_empty_bucket_absolute_index = -1
@@ -126,6 +125,7 @@ def process_bucket(
                     distances,
                     buckets,
                     bucket_sizes,
+                    max_buckets,
                 )
 
     for vertex_index, neighbour_index, edge_weight in heavy_edges:
@@ -141,6 +141,7 @@ def process_bucket(
                 distances,
                 buckets,
                 bucket_sizes,
+                max_buckets,
             )
 
 

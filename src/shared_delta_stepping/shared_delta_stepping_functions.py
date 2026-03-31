@@ -104,8 +104,8 @@ def add_to_bucket(
     distances: ndarray[FLOAT_TYPE],
     buckets: ndarray[INT_TYPE],
     bucket_sizes: ndarray[INT_TYPE],
+    max_buckets: int,
 ) -> None:
-    max_buckets = len(bucket_sizes)
     bucket_index = int(distances[vertex_index] // delta) % max_buckets
 
     current_size = bucket_sizes[bucket_index]

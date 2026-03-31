@@ -112,6 +112,7 @@ def parallel_delta_stepping(
             shared_distances,
             shared_buckets,
             shared_bucket_sizes,
+            max_buckets,
         )
 
         distances_lock = Lock()
