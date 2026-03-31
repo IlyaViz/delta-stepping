@@ -1,15 +1,18 @@
 import math
 from atexit import register
 from traceback import print_exc
-from numpy import ndarray, int32, float32, dtype
+from numpy import ndarray, dtype
 from multiprocessing import cpu_count, shared_memory, Lock, Pool
-from src.utils.delta_stepping_params_validator import validate_delta_stepping_params
+from multiprocessing.synchronize import Lock as LockType
+from src.const.dtype import INT_DTYPE, FLOAT_DTYPE, FLOAT_TYPE
+from src.shared_delta_stepping.shared_delta_stepping_functions import (
+    add_to_bucket,
+    prepare_ndarrays,
+    validate_and_prepare_variables,
+)
 
 
 MIN_VERTICES_PER_PROCESS = 25
-INT_DTYPE = dtype(int32)
-FLOAT_DTYPE = dtype(float32)
-
 
 distances_lock_global = None
 buckets_lock_global = None
@@ -35,22 +38,13 @@ def parallel_delta_stepping(
     source_vertex_index: int,
     delta: float = -1,
     processes_count: int = cpu_count(),
-) -> None:
+) -> list[float]:
     if processes_count <= 0:
         raise ValueError("Processes count must be a positive integer.")
 
-    validate_delta_stepping_params(neighbours, weights, source_vertex_index, delta)
-
-    vertices_length = len(neighbours)
-    max_degree = max(len(row) for row in neighbours)
-    flattened_weights = [weight for sublist in weights for weight in sublist]
-
-    if delta == -1:
-        avg_weight = sum(flattened_weights) / len(flattened_weights)
-        delta = avg_weight / 50
-
-    max_weight = max(flattened_weights)
-    max_buckets = int(max_weight // delta) + 2
+    vertices_length, max_degree, max_buckets, delta = validate_and_prepare_variables(
+        neighbours, weights, source_vertex_index, delta
+    )
 
     try:
         shm_list = []
@@ -86,38 +80,31 @@ def parallel_delta_stepping(
         )
         shm_list.append(shm_buckets_sizes)
 
-        shared_neighbours = ndarray(
-            (vertices_length, max_degree), dtype=INT_DTYPE, buffer=shm_neighbours.buf
+        buffers = [
+            shm_neighbours.buf,
+            shm_distances.buf,
+            shm_weights.buf,
+            shm_buckets.buf,
+            shm_in_bucket.buf,
+            shm_buckets_sizes.buf,
+        ]
+        (
+            _,
+            shared_distances,
+            _,
+            shared_buckets,
+            shared_in_bucket,
+            shared_bucket_sizes,
+        ) = prepare_ndarrays(
+            vertices_length,
+            max_degree,
+            max_buckets,
+            buffers=buffers,
+            set_defaults=True,
+            source_vertex_index=source_vertex_index,
+            neighbours=neighbours,
+            weights=weights,
         )
-        shared_distances = ndarray(
-            (vertices_length,), dtype=FLOAT_DTYPE, buffer=shm_distances.buf
-        )
-        shared_weights = ndarray(
-            (vertices_length, max_degree), dtype=FLOAT_DTYPE, buffer=shm_weights.buf
-        )
-        shared_buckets = ndarray(
-            (max_buckets, vertices_length),
-            dtype=INT_DTYPE,
-            buffer=shm_buckets.buf,
-        )
-        shared_in_bucket = ndarray(
-            (max_buckets, vertices_length), dtype=bool, buffer=shm_in_bucket.buf
-        )
-        shared_bucket_sizes = ndarray(
-            (max_buckets,), dtype=INT_DTYPE, buffer=shm_buckets_sizes.buf
-        )
-
-        shared_neighbours.fill(-1)
-        shared_distances.fill(float("inf"))
-        shared_bucket_sizes.fill(0)
-
-        shared_distances[source_vertex_index] = 0.0
-
-        padded_neighbours = [row + [-1] * (max_degree - len(row)) for row in neighbours]
-        padded_weights = [row + [0.0] * (max_degree - len(row)) for row in weights]
-
-        shared_neighbours[:, :] = padded_neighbours
-        shared_weights[:, :] = padded_weights
 
         add_to_bucket(
             delta,
@@ -210,17 +197,17 @@ def parallel_delta_stepping(
 
 
 def init_process(
-    distances_lock,
-    buckets_lock,
-    shm_neighbours,
-    shm_distances,
-    shm_weights,
-    shm_buckets,
-    shm_in_bucket,
-    shm_bucket_sizes,
-    max_degree,
-    max_buckets,
-    vertices_length,
+    distances_lock: LockType,
+    buckets_lock: LockType,
+    shm_neighbours: str,
+    shm_distances: str,
+    shm_weights: str,
+    shm_buckets: str,
+    shm_in_bucket: str,
+    shm_bucket_sizes: str,
+    max_degree: int,
+    max_buckets: int,
+    vertices_length: int,
 ):
     global distances_lock_global
     global buckets_lock_global
@@ -248,37 +235,32 @@ def init_process(
     existing_shm_in_bucket = shared_memory.SharedMemory(name=shm_in_bucket)
     existing_shm_bucket_sizes = shared_memory.SharedMemory(name=shm_bucket_sizes)
 
-    neighbours_global = ndarray(
-        (vertices_length, max_degree),
-        dtype=INT_DTYPE,
-        buffer=existing_shm_neighbours.buf,
-    )
-    distances_global = ndarray(
-        (vertices_length,), dtype=FLOAT_DTYPE, buffer=existing_shm_distances.buf
-    )
-    weights_global = ndarray(
-        (vertices_length, max_degree),
-        dtype=FLOAT_DTYPE,
-        buffer=existing_shm_weights.buf,
-    )
-    buckets_global = ndarray(
-        (max_buckets, vertices_length),
-        dtype=INT_DTYPE,
-        buffer=existing_shm_buckets.buf,
-    )
-    in_bucket_global = ndarray(
-        (max_buckets, vertices_length), dtype=bool, buffer=existing_shm_in_bucket.buf
-    )
-    bucket_sizes_global = ndarray(
-        (max_buckets,),
-        dtype=INT_DTYPE,
-        buffer=existing_shm_bucket_sizes.buf,
+    buffers = [
+        existing_shm_neighbours.buf,
+        existing_shm_distances.buf,
+        existing_shm_weights.buf,
+        existing_shm_buckets.buf,
+        existing_shm_in_bucket.buf,
+        existing_shm_bucket_sizes.buf,
+    ]
+    (
+        neighbours_global,
+        distances_global,
+        weights_global,
+        buckets_global,
+        in_bucket_global,
+        bucket_sizes_global,
+    ) = prepare_ndarrays(
+        vertices_length,
+        max_degree,
+        max_buckets,
+        buffers=buffers,
     )
 
     register(close_worker_shm)
 
 
-def close_worker_shm():
+def close_worker_shm() -> None:
     global existing_shm_neighbours
     global existing_shm_distances
     global existing_shm_weights
@@ -317,7 +299,7 @@ def process_bucket(
     while local_vertices_to_process := local_buckets[actual_bucket_index]:
         while local_vertices_to_process:
             vertex_index = local_vertices_to_process.pop()
- 
+
             current_dist = local_distance_updates.get(
                 vertex_index, distances_global[vertex_index]
             )
@@ -395,42 +377,6 @@ def process_bucket(
                         bucket_sizes_global[bucket_index] += 1
 
 
-def relax_neighbour(
-    vertex_index: int,
-    neighbour_index: int,
-    edge_weight: float,
-    distances: ndarray[FLOAT_DTYPE],
-    local_distance_updates: dict[int, float],
-) -> bool:
-    vertex_distance = local_distance_updates.get(vertex_index, distances[vertex_index])
-    neighbour_distance = local_distance_updates.get(
-        neighbour_index, distances[neighbour_index]
-    )
-    new_distance = vertex_distance + edge_weight
-
-    if new_distance < neighbour_distance:
-        local_distance_updates[neighbour_index] = new_distance
-        return True
-
-    return False
-
-
-def add_to_bucket(
-    delta,
-    vertex: int,
-    distances: ndarray[FLOAT_DTYPE],
-    buckets: ndarray[INT_DTYPE],
-    bucket_sizes: ndarray[INT_DTYPE],
-) -> None:
-    max_buckets = len(bucket_sizes)
-    bucket_index = int(distances[vertex] // delta) % max_buckets
-
-    current_size = bucket_sizes[bucket_index]
-    buckets[bucket_index, current_size] = vertex
-
-    bucket_sizes[bucket_index] += 1
-
-
 def add_to_local_bucket(
     delta: float,
     vertex_index: int,
@@ -443,3 +389,24 @@ def add_to_local_bucket(
     )
     local_bucket = local_buckets.setdefault(bucket_index, set())
     local_bucket.add(vertex_index)
+
+
+def relax_neighbour(
+    vertex_index: int,
+    neighbour_index: int,
+    edge_weight: float,
+    distances: ndarray[FLOAT_TYPE],
+    local_distance_updates: dict[int, float],
+) -> bool:
+    vertex_distance = local_distance_updates.get(vertex_index, distances[vertex_index])
+    neighbour_distance = local_distance_updates.get(
+        neighbour_index, distances[neighbour_index]
+    )
+    new_distance = vertex_distance + edge_weight
+
+    if new_distance < neighbour_distance:
+        local_distance_updates[neighbour_index] = new_distance
+
+        return True
+
+    return False
