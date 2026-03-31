@@ -22,7 +22,7 @@ def validate_and_prepare_variables(
         delta = avg_weight / 50
 
     max_weight = max(flattened_weights)
-    max_buckets = int(max_weight // delta) + 1
+    max_buckets = int(max_weight // delta) + 2
 
     return vertices_length, max_degree, max_buckets, delta
 
