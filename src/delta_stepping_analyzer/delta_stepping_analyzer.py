@@ -77,10 +77,10 @@ def perform_delta_stepping_analysis(
                             ):
                                 with open(f"{output_folder}/summary.txt", "w") as f:
                                     f.write(
-                                        f"Distances do not match for vertex {vertex} in graph with {vertex_count} vertices and edge ratio {edge_ratio}\n"
+                                        f"Distances {sequential_distances[vertex]} and {parallel_distanaces[vertex]} do not match for vertex {vertex} in graph with {vertex_count} vertices and edge ratio {edge_ratio}\n"
                                     )
                                 raise ValueError(
-                                    f"Distances do not match for vertex {vertex} in graph with {vertex_count} vertices and edge ratio {edge_ratio}"
+                                    f"Distances {sequential_distances[vertex]} and {parallel_distanaces[vertex]} do not match for vertex {vertex} in graph with {vertex_count} vertices and edge ratio {edge_ratio}"
                                 )
 
                     average_sequential_time = total_sequential_time / retries
