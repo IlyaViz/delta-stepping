@@ -20,6 +20,7 @@ if __name__ == "__main__":
     cpu_options = [2, 4, 8, 16]
     min_weight = 1
     max_weight = 100
+    retries = 5
 
     # vertex_options = [2, 1000]
     # edge_ratio_options = [500, 1000]
@@ -36,6 +37,7 @@ if __name__ == "__main__":
         output_folder="docs/analysis_results",
         min_weight=min_weight,
         max_weight=max_weight,
+        retries=retries,
     )
 
     # neighbours, weights = generate_weighted_graph_with_default_types(

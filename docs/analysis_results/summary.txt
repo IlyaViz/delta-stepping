@@ -1,1262 +1,963 @@
-Delta Stepping Analysis Summary
-Total analysis time: 3490.25 seconds
-Vertex Count: 2, Edge Ratio: 500, Delta: 1, CPUs: 4
-Average Sequential Time: 0.0004 seconds
-Average Parallel Time: 0.5519 seconds
-
-Vertex Count: 2, Edge Ratio: 1000, Delta: 1, CPUs: 4
-Average Sequential Time: 0.0007 seconds
-Average Parallel Time: 0.5552 seconds
-
-Vertex Count: 2, Edge Ratio: 500, Delta: 1, CPUs: 8
-Average Sequential Time: 0.0004 seconds
-Average Parallel Time: 0.6687 seconds
-
-Vertex Count: 2, Edge Ratio: 1000, Delta: 1, CPUs: 8
-Average Sequential Time: 0.0008 seconds
-Average Parallel Time: 0.6414 seconds
-
-Vertex Count: 2, Edge Ratio: 500, Delta: 1, CPUs: 16
-Average Sequential Time: 0.0004 seconds
-Average Parallel Time: 0.9819 seconds
-
-Vertex Count: 2, Edge Ratio: 1000, Delta: 1, CPUs: 16
-Average Sequential Time: 0.0009 seconds
-Average Parallel Time: 0.9608 seconds
-
-Vertex Count: 1000, Edge Ratio: 500, Delta: 1, CPUs: 4
-Average Sequential Time: 0.4017 seconds
-Average Parallel Time: 0.8997 seconds
-
-Vertex Count: 1000, Edge Ratio: 1000, Delta: 1, CPUs: 4
-Average Sequential Time: 1.0153 seconds
-Average Parallel Time: 1.3413 seconds
-
-Vertex Count: 1000, Edge Ratio: 500, Delta: 1, CPUs: 8
-Average Sequential Time: 0.4253 seconds
-Average Parallel Time: 0.9540 seconds
-
-Vertex Count: 1000, Edge Ratio: 1000, Delta: 1, CPUs: 8
-Average Sequential Time: 1.0086 seconds
-Average Parallel Time: 1.3034 seconds
-
-Vertex Count: 1000, Edge Ratio: 500, Delta: 1, CPUs: 16
-Average Sequential Time: 0.4243 seconds
-Average Parallel Time: 1.2515 seconds
-
-Vertex Count: 1000, Edge Ratio: 1000, Delta: 1, CPUs: 16
-Average Sequential Time: 1.0232 seconds
-Average Parallel Time: 1.5482 seconds
-
-Vertex Count: 2, Edge Ratio: 500, Delta: 2, CPUs: 4
-Average Sequential Time: 0.0005 seconds
-Average Parallel Time: 0.5462 seconds
-
-Vertex Count: 2, Edge Ratio: 1000, Delta: 2, CPUs: 4
-Average Sequential Time: 0.0010 seconds
-Average Parallel Time: 0.5514 seconds
-
-Vertex Count: 2, Edge Ratio: 500, Delta: 2, CPUs: 8
-Average Sequential Time: 0.0005 seconds
-Average Parallel Time: 0.6808 seconds
-
-Vertex Count: 2, Edge Ratio: 1000, Delta: 2, CPUs: 8
-Average Sequential Time: 0.0010 seconds
-Average Parallel Time: 0.6748 seconds
-
-Vertex Count: 2, Edge Ratio: 500, Delta: 2, CPUs: 16
-Average Sequential Time: 0.0005 seconds
-Average Parallel Time: 1.0563 seconds
-
-Vertex Count: 2, Edge Ratio: 1000, Delta: 2, CPUs: 16
-Average Sequential Time: 0.0012 seconds
-Average Parallel Time: 1.0884 seconds
-
-Vertex Count: 1000, Edge Ratio: 500, Delta: 2, CPUs: 4
-Average Sequential Time: 0.4747 seconds
-Average Parallel Time: 0.9558 seconds
-
-Vertex Count: 1000, Edge Ratio: 1000, Delta: 2, CPUs: 4
-Average Sequential Time: 1.1417 seconds
-Average Parallel Time: 1.3104 seconds
-
-Vertex Count: 1000, Edge Ratio: 500, Delta: 2, CPUs: 8
-Average Sequential Time: 0.4612 seconds
-Average Parallel Time: 0.9488 seconds
-
-Vertex Count: 1000, Edge Ratio: 1000, Delta: 2, CPUs: 8
-Average Sequential Time: 1.1207 seconds
-Average Parallel Time: 1.3296 seconds
-
-Vertex Count: 1000, Edge Ratio: 500, Delta: 2, CPUs: 16
-Average Sequential Time: 0.4571 seconds
-Average Parallel Time: 1.2555 seconds
-
-Vertex Count: 1000, Edge Ratio: 1000, Delta: 2, CPUs: 16
-Average Sequential Time: 1.0902 seconds
-Average Parallel Time: 1.5304 seconds
-
-Delta Stepping Analysis Summary
-Total analysis time: 105.09 seconds
+Distances 537.1173706054688 and inf do not match for vertex 895 in graph with 12000 vertices and edge ratio 1
 Vertex Count: 12000, Edge Ratio: 1, Delta: 0.5, CPUs: 2
-Average Sequential Time: 0.0017 seconds
-Average Parallel Time: 0.5373 seconds
-
-Vertex Count: 12000, Edge Ratio: 1, Delta: 0.5, CPUs: 2
-Average Sequential Time: 0.0016 seconds
-Average Parallel Time: 0.5060 seconds
-
-Vertex Count: 12000, Edge Ratio: 1, Delta: 0.5, CPUs: 2
-Average Sequential Time: 0.0016 seconds
-Average Parallel Time: 0.5097 seconds
+Average Sequential Time: 0.0151 seconds
+Average Parallel Time: 0.5130 seconds
 
 Vertex Count: 12000, Edge Ratio: 5, Delta: 0.5, CPUs: 2
-Average Sequential Time: 0.0330 seconds
-Average Parallel Time: 0.7022 seconds
+Average Sequential Time: 0.0931 seconds
+Average Parallel Time: 0.6815 seconds
 
 Vertex Count: 12000, Edge Ratio: 10, Delta: 0.5, CPUs: 2
-Average Sequential Time: 0.0544 seconds
-Average Parallel Time: 0.7106 seconds
+Average Sequential Time: 0.1559 seconds
+Average Parallel Time: 0.7039 seconds
 
 Vertex Count: 12000, Edge Ratio: 25, Delta: 0.5, CPUs: 2
-Average Sequential Time: 0.1577 seconds
-Average Parallel Time: 0.8712 seconds
-
-Vertex Count: 12000, Edge Ratio: 1, Delta: 0.5, CPUs: 4
-Average Sequential Time: 0.0019 seconds
-Average Parallel Time: 0.5229 seconds
-
-Vertex Count: 12000, Edge Ratio: 5, Delta: 0.5, CPUs: 4
-Average Sequential Time: 0.0302 seconds
-Average Parallel Time: 0.6893 seconds
-
-Vertex Count: 12000, Edge Ratio: 10, Delta: 0.5, CPUs: 4
-Average Sequential Time: 0.0531 seconds
-Average Parallel Time: 0.6945 seconds
-
-Vertex Count: 12000, Edge Ratio: 25, Delta: 0.5, CPUs: 4
-Average Sequential Time: 0.1522 seconds
-Average Parallel Time: 0.8066 seconds
-
-Vertex Count: 12000, Edge Ratio: 1, Delta: 0.5, CPUs: 8
-Average Sequential Time: 0.0024 seconds
-Average Parallel Time: 0.6165 seconds
-
-Vertex Count: 12000, Edge Ratio: 5, Delta: 0.5, CPUs: 8
-Average Sequential Time: 0.0296 seconds
-Average Parallel Time: 0.7832 seconds
-
-Vertex Count: 12000, Edge Ratio: 10, Delta: 0.5, CPUs: 8
-Average Sequential Time: 0.0551 seconds
-Average Parallel Time: 0.7823 seconds
-
-Vertex Count: 12000, Edge Ratio: 25, Delta: 0.5, CPUs: 8
-Average Sequential Time: 0.1549 seconds
+Average Sequential Time: 0.3521 seconds
 Average Parallel Time: 0.8655 seconds
 
-Vertex Count: 12000, Edge Ratio: 1, Delta: 0.5, CPUs: 16
-Average Sequential Time: 0.0025 seconds
-Average Parallel Time: 0.8670 seconds
-
-Vertex Count: 12000, Edge Ratio: 5, Delta: 0.5, CPUs: 16
-Average Sequential Time: 0.0311 seconds
-Average Parallel Time: 1.0658 seconds
-
-Vertex Count: 12000, Edge Ratio: 10, Delta: 0.5, CPUs: 16
-Average Sequential Time: 0.0552 seconds
-Average Parallel Time: 1.0724 seconds
-
-Vertex Count: 12000, Edge Ratio: 25, Delta: 0.5, CPUs: 16
-Average Sequential Time: 0.1483 seconds
-Average Parallel Time: 1.1750 seconds
-
-Vertex Count: 120000, Edge Ratio: 1, Delta: 0.5, CPUs: 2
-Average Sequential Time: 0.0213 seconds
-Average Parallel Time: 0.6821 seconds
-
-Vertex Count: 120000, Edge Ratio: 5, Delta: 0.5, CPUs: 2
-Average Sequential Time: 0.5546 seconds
-Average Parallel Time: 1.8322 seconds
-
-Vertex Count: 120000, Edge Ratio: 10, Delta: 0.5, CPUs: 2
-Average Sequential Time: 1.0896 seconds
-Average Parallel Time: 2.5486 seconds
-
-Vertex Count: 120000, Edge Ratio: 25, Delta: 0.5, CPUs: 2
-Average Sequential Time: 2.8853 seconds
-Average Parallel Time: 4.5373 seconds
-
-Vertex Count: 120000, Edge Ratio: 1, Delta: 0.5, CPUs: 4
-Average Sequential Time: 0.0254 seconds
-Average Parallel Time: 0.7506 seconds
-
-Vertex Count: 120000, Edge Ratio: 5, Delta: 0.5, CPUs: 4
-Average Sequential Time: 0.5610 seconds
-Average Parallel Time: 1.6687 seconds
-
-Vertex Count: 120000, Edge Ratio: 10, Delta: 0.5, CPUs: 4
-Average Sequential Time: 1.1036 seconds
-Average Parallel Time: 2.2463 seconds
-
-Vertex Count: 120000, Edge Ratio: 25, Delta: 0.5, CPUs: 4
-Average Sequential Time: 2.9005 seconds
-Average Parallel Time: 3.8132 seconds
-
-Vertex Count: 120000, Edge Ratio: 1, Delta: 0.5, CPUs: 8
-Average Sequential Time: 0.0263 seconds
-Average Parallel Time: 0.8038 seconds
-
-Vertex Count: 120000, Edge Ratio: 5, Delta: 0.5, CPUs: 8
-Average Sequential Time: 0.5629 seconds
-Average Parallel Time: 1.7723 seconds
-
-Vertex Count: 120000, Edge Ratio: 10, Delta: 0.5, CPUs: 8
-Average Sequential Time: 1.1160 seconds
-Average Parallel Time: 2.2347 seconds
-
-Vertex Count: 120000, Edge Ratio: 25, Delta: 0.5, CPUs: 8
-Average Sequential Time: 2.9304 seconds
-Average Parallel Time: 3.6841 seconds
-
-Vertex Count: 120000, Edge Ratio: 1, Delta: 0.5, CPUs: 16
-Average Sequential Time: 0.0323 seconds
-Average Parallel Time: 1.0890 seconds
-
-Vertex Count: 120000, Edge Ratio: 5, Delta: 0.5, CPUs: 16
-Average Sequential Time: 0.5708 seconds
-Average Parallel Time: 2.1187 seconds
-
-Vertex Count: 120000, Edge Ratio: 10, Delta: 0.5, CPUs: 16
-Average Sequential Time: 1.1083 seconds
-Average Parallel Time: 2.5687 seconds
-
-Vertex Count: 120000, Edge Ratio: 25, Delta: 0.5, CPUs: 16
-Average Sequential Time: 3.0332 seconds
-Average Parallel Time: 3.9341 seconds
-
-Vertex Count: 1200000, Edge Ratio: 1, Delta: 0.5, CPUs: 2
-Average Sequential Time: 0.3996 seconds
-Average Parallel Time: 3.2545 seconds
-
-Vertex Count: 1200000, Edge Ratio: 5, Delta: 0.5, CPUs: 2
-Average Sequential Time: 7.9255 seconds
-Average Parallel Time: 13.7870 seconds
-
-Vertex Count: 1200000, Edge Ratio: 10, Delta: 0.5, CPUs: 2
-Average Sequential Time: 16.6886 seconds
-Average Parallel Time: 22.1274 seconds
-
-Vertex Count: 12000, Edge Ratio: 1, Delta: 0.5, CPUs: 2
-Average Sequential Time: 0.0016 seconds
-Average Parallel Time: 0.5101 seconds
-
-Vertex Count: 12000, Edge Ratio: 5, Delta: 0.5, CPUs: 2
-Average Sequential Time: 0.0309 seconds
-Average Parallel Time: 0.6859 seconds
-
-Vertex Count: 12000, Edge Ratio: 10, Delta: 0.5, CPUs: 2
-Average Sequential Time: 0.0568 seconds
-Average Parallel Time: 0.7031 seconds
-
-Vertex Count: 12000, Edge Ratio: 25, Delta: 0.5, CPUs: 2
-Average Sequential Time: 0.1676 seconds
-Average Parallel Time: 0.8805 seconds
-
 Vertex Count: 12000, Edge Ratio: 1, Delta: 0.5, CPUs: 4
-Average Sequential Time: 0.0020 seconds
-Average Parallel Time: 0.5289 seconds
+Average Sequential Time: 0.0162 seconds
+Average Parallel Time: 0.5350 seconds
 
 Vertex Count: 12000, Edge Ratio: 5, Delta: 0.5, CPUs: 4
-Average Sequential Time: 0.0306 seconds
-Average Parallel Time: 0.7005 seconds
+Average Sequential Time: 0.0947 seconds
+Average Parallel Time: 0.6979 seconds
 
 Vertex Count: 12000, Edge Ratio: 10, Delta: 0.5, CPUs: 4
-Average Sequential Time: 0.0570 seconds
-Average Parallel Time: 0.7057 seconds
+Average Sequential Time: 0.1545 seconds
+Average Parallel Time: 0.7133 seconds
 
 Vertex Count: 12000, Edge Ratio: 25, Delta: 0.5, CPUs: 4
-Average Sequential Time: 0.1635 seconds
-Average Parallel Time: 0.8336 seconds
+Average Sequential Time: 0.3540 seconds
+Average Parallel Time: 0.8312 seconds
 
 Vertex Count: 12000, Edge Ratio: 1, Delta: 0.5, CPUs: 8
-Average Sequential Time: 0.0022 seconds
-Average Parallel Time: 0.6207 seconds
+Average Sequential Time: 0.0176 seconds
+Average Parallel Time: 0.6265 seconds
 
 Vertex Count: 12000, Edge Ratio: 5, Delta: 0.5, CPUs: 8
-Average Sequential Time: 0.0305 seconds
-Average Parallel Time: 0.7970 seconds
+Average Sequential Time: 0.0958 seconds
+Average Parallel Time: 0.7976 seconds
 
 Vertex Count: 12000, Edge Ratio: 10, Delta: 0.5, CPUs: 8
-Average Sequential Time: 0.0566 seconds
-Average Parallel Time: 0.7991 seconds
+Average Sequential Time: 0.1579 seconds
+Average Parallel Time: 0.8024 seconds
 
 Vertex Count: 12000, Edge Ratio: 25, Delta: 0.5, CPUs: 8
-Average Sequential Time: 0.1663 seconds
-Average Parallel Time: 0.9008 seconds
+Average Sequential Time: 0.3542 seconds
+Average Parallel Time: 0.9145 seconds
 
 Vertex Count: 12000, Edge Ratio: 1, Delta: 0.5, CPUs: 16
-Average Sequential Time: 0.0028 seconds
-Average Parallel Time: 0.8966 seconds
-
-Vertex Count: 12000, Edge Ratio: 1, Delta: 0.5, CPUs: 2
-Average Sequential Time: 0.0016 seconds
-Average Parallel Time: 0.5096 seconds
-
-Vertex Count: 12000, Edge Ratio: 5, Delta: 0.5, CPUs: 2
-Average Sequential Time: 0.0295 seconds
-Average Parallel Time: 0.6834 seconds
-
-Vertex Count: 12000, Edge Ratio: 10, Delta: 0.5, CPUs: 2
-Average Sequential Time: 0.0553 seconds
-Average Parallel Time: 0.7041 seconds
-
-Vertex Count: 12000, Edge Ratio: 25, Delta: 0.5, CPUs: 2
-Average Sequential Time: 0.1657 seconds
-Average Parallel Time: 0.8742 seconds
-
-Vertex Count: 12000, Edge Ratio: 1, Delta: 0.5, CPUs: 4
-Average Sequential Time: 0.0019 seconds
-Average Parallel Time: 0.5271 seconds
-
-Vertex Count: 12000, Edge Ratio: 5, Delta: 0.5, CPUs: 4
-Average Sequential Time: 0.0302 seconds
-Average Parallel Time: 0.6973 seconds
-
-Vertex Count: 12000, Edge Ratio: 10, Delta: 0.5, CPUs: 4
-Average Sequential Time: 0.0555 seconds
-Average Parallel Time: 0.7047 seconds
-
-Vertex Count: 12000, Edge Ratio: 25, Delta: 0.5, CPUs: 4
-Average Sequential Time: 0.1649 seconds
-Average Parallel Time: 0.8319 seconds
-
-Vertex Count: 12000, Edge Ratio: 1, Delta: 0.5, CPUs: 8
-Average Sequential Time: 0.0021 seconds
-Average Parallel Time: 0.6179 seconds
-
-Vertex Count: 12000, Edge Ratio: 5, Delta: 0.5, CPUs: 8
-Average Sequential Time: 0.0305 seconds
-Average Parallel Time: 0.8091 seconds
-
-Vertex Count: 12000, Edge Ratio: 10, Delta: 0.5, CPUs: 8
-Average Sequential Time: 0.0573 seconds
-Average Parallel Time: 0.7949 seconds
-
-Vertex Count: 12000, Edge Ratio: 25, Delta: 0.5, CPUs: 8
-Average Sequential Time: 0.1643 seconds
-Average Parallel Time: 0.9104 seconds
-
-Vertex Count: 12000, Edge Ratio: 1, Delta: 0.5, CPUs: 16
-Average Sequential Time: 0.0028 seconds
-Average Parallel Time: 0.8786 seconds
+Average Sequential Time: 0.0195 seconds
+Average Parallel Time: 0.8772 seconds
 
 Vertex Count: 12000, Edge Ratio: 5, Delta: 0.5, CPUs: 16
-Average Sequential Time: 0.0317 seconds
-Average Parallel Time: 1.0761 seconds
+Average Sequential Time: 0.0990 seconds
+Average Parallel Time: 1.0868 seconds
 
 Vertex Count: 12000, Edge Ratio: 10, Delta: 0.5, CPUs: 16
-Average Sequential Time: 0.0612 seconds
-Average Parallel Time: 1.0722 seconds
+Average Sequential Time: 0.1586 seconds
+Average Parallel Time: 1.0891 seconds
 
 Vertex Count: 12000, Edge Ratio: 25, Delta: 0.5, CPUs: 16
-Average Sequential Time: 0.1700 seconds
-Average Parallel Time: 1.1835 seconds
+Average Sequential Time: 0.3573 seconds
+Average Parallel Time: 1.1978 seconds
 
 Vertex Count: 120000, Edge Ratio: 1, Delta: 0.5, CPUs: 2
-Average Sequential Time: 0.0225 seconds
-Average Parallel Time: 0.6897 seconds
+Average Sequential Time: 0.1870 seconds
+Average Parallel Time: 0.6805 seconds
 
 Vertex Count: 120000, Edge Ratio: 5, Delta: 0.5, CPUs: 2
-Average Sequential Time: 0.5740 seconds
-Average Parallel Time: 1.8377 seconds
+Average Sequential Time: 1.2235 seconds
+Average Parallel Time: 1.8132 seconds
 
 Vertex Count: 120000, Edge Ratio: 10, Delta: 0.5, CPUs: 2
-Average Sequential Time: 1.1243 seconds
-Average Parallel Time: 2.5015 seconds
+Average Sequential Time: 2.0001 seconds
+Average Parallel Time: 2.4840 seconds
 
 Vertex Count: 120000, Edge Ratio: 25, Delta: 0.5, CPUs: 2
-Average Sequential Time: 3.0469 seconds
-Average Parallel Time: 4.6709 seconds
+Average Sequential Time: 4.4919 seconds
+Average Parallel Time: 4.5414 seconds
 
 Vertex Count: 120000, Edge Ratio: 1, Delta: 0.5, CPUs: 4
-Average Sequential Time: 0.0260 seconds
-Average Parallel Time: 0.7452 seconds
+Average Sequential Time: 0.2242 seconds
+Average Parallel Time: 0.7276 seconds
 
 Vertex Count: 120000, Edge Ratio: 5, Delta: 0.5, CPUs: 4
-Average Sequential Time: 0.5820 seconds
-Average Parallel Time: 1.7355 seconds
+Average Sequential Time: 1.1960 seconds
+Average Parallel Time: 1.7188 seconds
 
 Vertex Count: 120000, Edge Ratio: 10, Delta: 0.5, CPUs: 4
-Average Sequential Time: 1.1432 seconds
-Average Parallel Time: 2.2679 seconds
+Average Sequential Time: 2.0387 seconds
+Average Parallel Time: 2.2512 seconds
 
 Vertex Count: 120000, Edge Ratio: 25, Delta: 0.5, CPUs: 4
-Average Sequential Time: 3.0509 seconds
-Average Parallel Time: 3.9443 seconds
+Average Sequential Time: 4.7685 seconds
+Average Parallel Time: 4.0912 seconds
 
 Vertex Count: 120000, Edge Ratio: 1, Delta: 0.5, CPUs: 8
-Average Sequential Time: 0.0304 seconds
-Average Parallel Time: 0.8534 seconds
+Average Sequential Time: 0.2747 seconds
+Average Parallel Time: 0.9942 seconds
 
 Vertex Count: 120000, Edge Ratio: 5, Delta: 0.5, CPUs: 8
-Average Sequential Time: 0.5920 seconds
-Average Parallel Time: 1.8070 seconds
+Average Sequential Time: 1.3748 seconds
+Average Parallel Time: 1.9579 seconds
 
 Vertex Count: 120000, Edge Ratio: 10, Delta: 0.5, CPUs: 8
-Average Sequential Time: 1.1462 seconds
-Average Parallel Time: 2.3089 seconds
+Average Sequential Time: 2.1482 seconds
+Average Parallel Time: 2.3284 seconds
 
 Vertex Count: 120000, Edge Ratio: 25, Delta: 0.5, CPUs: 8
-Average Sequential Time: 3.1235 seconds
-Average Parallel Time: 3.7778 seconds
+Average Sequential Time: 4.5583 seconds
+Average Parallel Time: 3.6418 seconds
 
 Vertex Count: 120000, Edge Ratio: 1, Delta: 0.5, CPUs: 16
-Average Sequential Time: 0.0388 seconds
-Average Parallel Time: 1.1157 seconds
+Average Sequential Time: 0.2850 seconds
+Average Parallel Time: 1.1145 seconds
 
 Vertex Count: 120000, Edge Ratio: 5, Delta: 0.5, CPUs: 16
-Average Sequential Time: 0.6032 seconds
-Average Parallel Time: 2.1803 seconds
+Average Sequential Time: 1.2957 seconds
+Average Parallel Time: 2.1129 seconds
 
 Vertex Count: 120000, Edge Ratio: 10, Delta: 0.5, CPUs: 16
-Average Sequential Time: 1.1540 seconds
-Average Parallel Time: 2.6322 seconds
+Average Sequential Time: 2.1175 seconds
+Average Parallel Time: 2.5643 seconds
 
 Vertex Count: 120000, Edge Ratio: 25, Delta: 0.5, CPUs: 16
-Average Sequential Time: 3.0773 seconds
-Average Parallel Time: 3.9703 seconds
+Average Sequential Time: 4.6057 seconds
+Average Parallel Time: 3.8082 seconds
 
 Vertex Count: 1200000, Edge Ratio: 1, Delta: 0.5, CPUs: 2
-Average Sequential Time: 0.4023 seconds
-Average Parallel Time: 3.2456 seconds
+Average Sequential Time: 2.6755 seconds
+Average Parallel Time: 3.2944 seconds
 
 Vertex Count: 1200000, Edge Ratio: 5, Delta: 0.5, CPUs: 2
-Average Sequential Time: 9.1709 seconds
-Average Parallel Time: 14.3531 seconds
+Average Sequential Time: 13.6226 seconds
+Average Parallel Time: 13.6378 seconds
 
 Vertex Count: 1200000, Edge Ratio: 10, Delta: 0.5, CPUs: 2
-Average Sequential Time: 17.5678 seconds
-Average Parallel Time: 22.5464 seconds
+Average Sequential Time: 23.6857 seconds
+Average Parallel Time: 22.4505 seconds
 
 Vertex Count: 1200000, Edge Ratio: 25, Delta: 0.5, CPUs: 2
-Average Sequential Time: 49.4937 seconds
-Average Parallel Time: 49.6020 seconds
+Average Sequential Time: 55.7025 seconds
+Average Parallel Time: 47.8065 seconds
 
 Vertex Count: 1200000, Edge Ratio: 1, Delta: 0.5, CPUs: 4
-Average Sequential Time: 0.4417 seconds
-Average Parallel Time: 3.4502 seconds
+Average Sequential Time: 2.9098 seconds
+Average Parallel Time: 3.2260 seconds
 
 Vertex Count: 1200000, Edge Ratio: 5, Delta: 0.5, CPUs: 4
-Average Sequential Time: 8.5319 seconds
-Average Parallel Time: 12.4338 seconds
+Average Sequential Time: 13.6741 seconds
+Average Parallel Time: 12.0917 seconds
 
 Vertex Count: 1200000, Edge Ratio: 10, Delta: 0.5, CPUs: 4
-Average Sequential Time: 17.6079 seconds
-Average Parallel Time: 18.7498 seconds
+Average Sequential Time: 23.8597 seconds
+Average Parallel Time: 18.6596 seconds
 
 Vertex Count: 1200000, Edge Ratio: 25, Delta: 0.5, CPUs: 4
-Average Sequential Time: 46.0795 seconds
-Average Parallel Time: 38.6828 seconds
+Average Sequential Time: 56.2518 seconds
+Average Parallel Time: 38.5795 seconds
 
 Vertex Count: 1200000, Edge Ratio: 1, Delta: 0.5, CPUs: 8
-Average Sequential Time: 0.4413 seconds
-Average Parallel Time: 3.6820 seconds
+Average Sequential Time: 3.1575 seconds
+Average Parallel Time: 3.7515 seconds
 
 Vertex Count: 1200000, Edge Ratio: 5, Delta: 0.5, CPUs: 8
-Average Sequential Time: 8.0462 seconds
-Average Parallel Time: 11.9192 seconds
+Average Sequential Time: 13.6837 seconds
+Average Parallel Time: 11.7660 seconds
 
 Vertex Count: 1200000, Edge Ratio: 10, Delta: 0.5, CPUs: 8
-Average Sequential Time: 16.7852 seconds
-Average Parallel Time: 17.8846 seconds
+Average Sequential Time: 24.0235 seconds
+Average Parallel Time: 17.7755 seconds
 
 Vertex Count: 1200000, Edge Ratio: 25, Delta: 0.5, CPUs: 8
-Average Sequential Time: 46.1199 seconds
-Average Parallel Time: 34.1563 seconds
+Average Sequential Time: 56.9734 seconds
+Average Parallel Time: 34.3540 seconds
 
 Vertex Count: 1200000, Edge Ratio: 1, Delta: 0.5, CPUs: 16
-Average Sequential Time: 0.4993 seconds
-Average Parallel Time: 4.4043 seconds
+Average Sequential Time: 3.2143 seconds
+Average Parallel Time: 4.2053 seconds
 
 Vertex Count: 1200000, Edge Ratio: 5, Delta: 0.5, CPUs: 16
-Average Sequential Time: 8.1643 seconds
-Average Parallel Time: 12.8015 seconds
+Average Sequential Time: 13.4584 seconds
+Average Parallel Time: 12.8018 seconds
 
 Vertex Count: 1200000, Edge Ratio: 10, Delta: 0.5, CPUs: 16
-Average Sequential Time: 16.6719 seconds
-Average Parallel Time: 18.4736 seconds
+Average Sequential Time: 24.1600 seconds
+Average Parallel Time: 17.7280 seconds
 
 Vertex Count: 1200000, Edge Ratio: 25, Delta: 0.5, CPUs: 16
-Average Sequential Time: 45.9650 seconds
-Average Parallel Time: 33.1898 seconds
+Average Sequential Time: 56.6228 seconds
+Average Parallel Time: 32.8060 seconds
 
 Vertex Count: 12000, Edge Ratio: 1, Delta: 1, CPUs: 2
-Average Sequential Time: 0.0162 seconds
-Average Parallel Time: 0.5093 seconds
+Average Sequential Time: 0.0222 seconds
+Average Parallel Time: 0.5207 seconds
 
 Vertex Count: 12000, Edge Ratio: 5, Delta: 1, CPUs: 2
-Average Sequential Time: 0.0316 seconds
-Average Parallel Time: 0.6213 seconds
+Average Sequential Time: 0.0976 seconds
+Average Parallel Time: 0.6446 seconds
 
 Vertex Count: 12000, Edge Ratio: 10, Delta: 1, CPUs: 2
-Average Sequential Time: 0.0589 seconds
-Average Parallel Time: 0.6575 seconds
+Average Sequential Time: 0.1594 seconds
+Average Parallel Time: 0.6826 seconds
 
 Vertex Count: 12000, Edge Ratio: 25, Delta: 1, CPUs: 2
-Average Sequential Time: 0.1635 seconds
-Average Parallel Time: 0.7972 seconds
+Average Sequential Time: 0.3621 seconds
+Average Parallel Time: 0.8458 seconds
 
 Vertex Count: 12000, Edge Ratio: 1, Delta: 1, CPUs: 4
-Average Sequential Time: 0.0027 seconds
-Average Parallel Time: 0.5150 seconds
+Average Sequential Time: 0.0201 seconds
+Average Parallel Time: 0.5341 seconds
 
 Vertex Count: 12000, Edge Ratio: 5, Delta: 1, CPUs: 4
-Average Sequential Time: 0.0314 seconds
-Average Parallel Time: 0.6332 seconds
+Average Sequential Time: 0.0958 seconds
+Average Parallel Time: 0.6478 seconds
 
 Vertex Count: 12000, Edge Ratio: 10, Delta: 1, CPUs: 4
-Average Sequential Time: 0.0593 seconds
-Average Parallel Time: 0.6531 seconds
+Average Sequential Time: 0.1588 seconds
+Average Parallel Time: 0.6718 seconds
 
 Vertex Count: 12000, Edge Ratio: 25, Delta: 1, CPUs: 4
-Average Sequential Time: 0.1625 seconds
-Average Parallel Time: 0.7674 seconds
+Average Sequential Time: 0.3613 seconds
+Average Parallel Time: 0.8003 seconds
 
 Vertex Count: 12000, Edge Ratio: 1, Delta: 1, CPUs: 8
-Average Sequential Time: 0.0026 seconds
-Average Parallel Time: 0.6011 seconds
+Average Sequential Time: 0.0192 seconds
+Average Parallel Time: 0.6214 seconds
 
 Vertex Count: 12000, Edge Ratio: 5, Delta: 1, CPUs: 8
-Average Sequential Time: 0.0314 seconds
-Average Parallel Time: 0.7273 seconds
+Average Sequential Time: 0.1009 seconds
+Average Parallel Time: 0.7420 seconds
 
 Vertex Count: 12000, Edge Ratio: 10, Delta: 1, CPUs: 8
-Average Sequential Time: 0.0580 seconds
-Average Parallel Time: 0.7319 seconds
+Average Sequential Time: 0.1624 seconds
+Average Parallel Time: 0.7636 seconds
 
 Vertex Count: 12000, Edge Ratio: 25, Delta: 1, CPUs: 8
-Average Sequential Time: 0.1647 seconds
-Average Parallel Time: 0.8254 seconds
+Average Sequential Time: 0.3773 seconds
+Average Parallel Time: 0.8823 seconds
 
 Vertex Count: 12000, Edge Ratio: 1, Delta: 1, CPUs: 16
-Average Sequential Time: 0.0028 seconds
-Average Parallel Time: 0.8565 seconds
+Average Sequential Time: 0.0205 seconds
+Average Parallel Time: 0.8890 seconds
 
 Vertex Count: 12000, Edge Ratio: 5, Delta: 1, CPUs: 16
-Average Sequential Time: 0.0335 seconds
-Average Parallel Time: 1.0083 seconds
+Average Sequential Time: 0.1020 seconds
+Average Parallel Time: 1.0284 seconds
 
 Vertex Count: 12000, Edge Ratio: 10, Delta: 1, CPUs: 16
-Average Sequential Time: 0.0595 seconds
-Average Parallel Time: 1.0152 seconds
+Average Sequential Time: 0.1658 seconds
+Average Parallel Time: 1.0437 seconds
 
 Vertex Count: 12000, Edge Ratio: 25, Delta: 1, CPUs: 16
-Average Sequential Time: 0.1639 seconds
-Average Parallel Time: 1.1042 seconds
+Average Sequential Time: 0.3672 seconds
+Average Parallel Time: 1.1495 seconds
 
 Vertex Count: 120000, Edge Ratio: 1, Delta: 1, CPUs: 2
-Average Sequential Time: 0.0207 seconds
-Average Parallel Time: 0.6829 seconds
+Average Sequential Time: 0.2006 seconds
+Average Parallel Time: 0.6878 seconds
 
 Vertex Count: 120000, Edge Ratio: 5, Delta: 1, CPUs: 2
-Average Sequential Time: 0.5860 seconds
-Average Parallel Time: 1.7463 seconds
+Average Sequential Time: 1.2319 seconds
+Average Parallel Time: 1.7411 seconds
 
 Vertex Count: 120000, Edge Ratio: 10, Delta: 1, CPUs: 2
-Average Sequential Time: 1.1709 seconds
-Average Parallel Time: 2.4504 seconds
+Average Sequential Time: 2.0759 seconds
+Average Parallel Time: 2.4369 seconds
 
 Vertex Count: 120000, Edge Ratio: 25, Delta: 1, CPUs: 2
-Average Sequential Time: 3.1775 seconds
-Average Parallel Time: 4.5353 seconds
+Average Sequential Time: 4.8583 seconds
+Average Parallel Time: 4.6517 seconds
 
 Vertex Count: 120000, Edge Ratio: 1, Delta: 1, CPUs: 4
-Average Sequential Time: 0.0267 seconds
-Average Parallel Time: 0.7024 seconds
+Average Sequential Time: 0.2140 seconds
+Average Parallel Time: 0.8405 seconds
 
 Vertex Count: 120000, Edge Ratio: 5, Delta: 1, CPUs: 4
-Average Sequential Time: 0.5707 seconds
-Average Parallel Time: 1.5814 seconds
+Average Sequential Time: 1.2527 seconds
+Average Parallel Time: 1.6128 seconds
 
 Vertex Count: 120000, Edge Ratio: 10, Delta: 1, CPUs: 4
-Average Sequential Time: 1.1831 seconds
-Average Parallel Time: 2.1891 seconds
+Average Sequential Time: 2.0925 seconds
+Average Parallel Time: 2.1840 seconds
 
 Vertex Count: 120000, Edge Ratio: 25, Delta: 1, CPUs: 4
-Average Sequential Time: 3.1899 seconds
-Average Parallel Time: 3.8430 seconds
+Average Sequential Time: 4.8669 seconds
+Average Parallel Time: 3.8970 seconds
 
 Vertex Count: 120000, Edge Ratio: 1, Delta: 1, CPUs: 8
-Average Sequential Time: 0.0314 seconds
-Average Parallel Time: 0.8060 seconds
+Average Sequential Time: 0.2210 seconds
+Average Parallel Time: 0.8403 seconds
 
 Vertex Count: 120000, Edge Ratio: 5, Delta: 1, CPUs: 8
-Average Sequential Time: 0.5826 seconds
-Average Parallel Time: 1.6124 seconds
+Average Sequential Time: 1.2761 seconds
+Average Parallel Time: 1.6527 seconds
 
 Vertex Count: 120000, Edge Ratio: 10, Delta: 1, CPUs: 8
-Average Sequential Time: 1.1828 seconds
-Average Parallel Time: 2.1824 seconds
+Average Sequential Time: 2.1517 seconds
+Average Parallel Time: 2.1235 seconds
 
 Vertex Count: 120000, Edge Ratio: 25, Delta: 1, CPUs: 8
-Average Sequential Time: 3.2058 seconds
-Average Parallel Time: 3.6506 seconds
+Average Sequential Time: 4.8713 seconds
+Average Parallel Time: 3.6810 seconds
 
 Vertex Count: 120000, Edge Ratio: 1, Delta: 1, CPUs: 16
-Average Sequential Time: 0.0429 seconds
-Average Parallel Time: 1.0799 seconds
+Average Sequential Time: 0.2668 seconds
+Average Parallel Time: 1.1178 seconds
 
 Vertex Count: 120000, Edge Ratio: 5, Delta: 1, CPUs: 16
-Average Sequential Time: 0.5869 seconds
-Average Parallel Time: 1.9488 seconds
+Average Sequential Time: 1.2654 seconds
+Average Parallel Time: 2.0184 seconds
 
 Vertex Count: 120000, Edge Ratio: 10, Delta: 1, CPUs: 16
-Average Sequential Time: 1.1905 seconds
-Average Parallel Time: 2.3743 seconds
+Average Sequential Time: 2.1120 seconds
+Average Parallel Time: 2.4552 seconds
 
 Vertex Count: 120000, Edge Ratio: 25, Delta: 1, CPUs: 16
-Average Sequential Time: 3.2020 seconds
-Average Parallel Time: 3.7230 seconds
+Average Sequential Time: 4.9095 seconds
+Average Parallel Time: 3.7695 seconds
 
 Vertex Count: 1200000, Edge Ratio: 1, Delta: 1, CPUs: 2
-Average Sequential Time: 0.4490 seconds
-Average Parallel Time: 3.2210 seconds
+Average Sequential Time: 2.6045 seconds
+Average Parallel Time: 3.1182 seconds
 
 Vertex Count: 1200000, Edge Ratio: 5, Delta: 1, CPUs: 2
-Average Sequential Time: 8.3936 seconds
-Average Parallel Time: 13.4475 seconds
+Average Sequential Time: 13.8360 seconds
+Average Parallel Time: 13.7411 seconds
 
 Vertex Count: 1200000, Edge Ratio: 10, Delta: 1, CPUs: 2
-Average Sequential Time: 18.3119 seconds
-Average Parallel Time: 22.3788 seconds
+Average Sequential Time: 25.1745 seconds
+Average Parallel Time: 22.5010 seconds
 
 Vertex Count: 1200000, Edge Ratio: 25, Delta: 1, CPUs: 2
-Average Sequential Time: 49.2316 seconds
-Average Parallel Time: 48.6981 seconds
+Average Sequential Time: 57.7606 seconds
+Average Parallel Time: 49.0622 seconds
 
 Vertex Count: 1200000, Edge Ratio: 1, Delta: 1, CPUs: 4
-Average Sequential Time: 0.4281 seconds
-Average Parallel Time: 3.3263 seconds
+Average Sequential Time: 2.8697 seconds
+Average Parallel Time: 3.3178 seconds
 
 Vertex Count: 1200000, Edge Ratio: 5, Delta: 1, CPUs: 4
-Average Sequential Time: 8.6170 seconds
-Average Parallel Time: 11.4613 seconds
+Average Sequential Time: 13.8464 seconds
+Average Parallel Time: 11.9846 seconds
 
 Vertex Count: 1200000, Edge Ratio: 10, Delta: 1, CPUs: 4
-Average Sequential Time: 18.4137 seconds
-Average Parallel Time: 18.8577 seconds
+Average Sequential Time: 25.2647 seconds
+Average Parallel Time: 18.7803 seconds
 
 Vertex Count: 1200000, Edge Ratio: 25, Delta: 1, CPUs: 4
-Average Sequential Time: 49.5712 seconds
-Average Parallel Time: 38.9269 seconds
+Average Sequential Time: 57.9831 seconds
+Average Parallel Time: 38.7773 seconds
 
 Vertex Count: 1200000, Edge Ratio: 1, Delta: 1, CPUs: 8
-Average Sequential Time: 0.4458 seconds
-Average Parallel Time: 3.7668 seconds
+Average Sequential Time: 2.9679 seconds
+Average Parallel Time: 3.7730 seconds
 
 Vertex Count: 1200000, Edge Ratio: 5, Delta: 1, CPUs: 8
-Average Sequential Time: 8.6466 seconds
-Average Parallel Time: 11.4083 seconds
+Average Sequential Time: 14.2283 seconds
+Average Parallel Time: 11.1365 seconds
 
 Vertex Count: 1200000, Edge Ratio: 10, Delta: 1, CPUs: 8
-Average Sequential Time: 18.3826 seconds
-Average Parallel Time: 17.0910 seconds
+Average Sequential Time: 25.6742 seconds
+Average Parallel Time: 16.7036 seconds
 
 Vertex Count: 1200000, Edge Ratio: 25, Delta: 1, CPUs: 8
-Average Sequential Time: 49.5594 seconds
-Average Parallel Time: 33.3703 seconds
+Average Sequential Time: 58.1505 seconds
+Average Parallel Time: 33.5983 seconds
 
 Vertex Count: 1200000, Edge Ratio: 1, Delta: 1, CPUs: 16
-Average Sequential Time: 0.5119 seconds
-Average Parallel Time: 4.1819 seconds
+Average Sequential Time: 3.3970 seconds
+Average Parallel Time: 4.1138 seconds
 
 Vertex Count: 1200000, Edge Ratio: 5, Delta: 1, CPUs: 16
-Average Sequential Time: 8.6718 seconds
-Average Parallel Time: 12.1581 seconds
+Average Sequential Time: 14.1454 seconds
+Average Parallel Time: 11.7716 seconds
 
 Vertex Count: 1200000, Edge Ratio: 10, Delta: 1, CPUs: 16
-Average Sequential Time: 18.4030 seconds
-Average Parallel Time: 17.4681 seconds
+Average Sequential Time: 25.7009 seconds
+Average Parallel Time: 17.5824 seconds
 
 Vertex Count: 1200000, Edge Ratio: 25, Delta: 1, CPUs: 16
-Average Sequential Time: 49.4675 seconds
-Average Parallel Time: 32.0183 seconds
+Average Sequential Time: 58.6175 seconds
+Average Parallel Time: 32.2778 seconds
 
 Vertex Count: 12000, Edge Ratio: 1, Delta: 2, CPUs: 2
-Average Sequential Time: 0.0164 seconds
-Average Parallel Time: 0.5090 seconds
+Average Sequential Time: 0.0233 seconds
+Average Parallel Time: 0.5207 seconds
 
 Vertex Count: 12000, Edge Ratio: 5, Delta: 2, CPUs: 2
-Average Sequential Time: 0.0329 seconds
-Average Parallel Time: 0.5981 seconds
+Average Sequential Time: 0.0986 seconds
+Average Parallel Time: 0.6157 seconds
 
 Vertex Count: 12000, Edge Ratio: 10, Delta: 2, CPUs: 2
-Average Sequential Time: 0.0622 seconds
-Average Parallel Time: 0.6397 seconds
+Average Sequential Time: 0.1625 seconds
+Average Parallel Time: 0.6620 seconds
 
 Vertex Count: 12000, Edge Ratio: 25, Delta: 2, CPUs: 2
-Average Sequential Time: 0.1833 seconds
-Average Parallel Time: 0.7784 seconds
+Average Sequential Time: 0.3797 seconds
+Average Parallel Time: 0.8318 seconds
 
 Vertex Count: 12000, Edge Ratio: 1, Delta: 2, CPUs: 4
-Average Sequential Time: 0.0028 seconds
-Average Parallel Time: 0.5125 seconds
+Average Sequential Time: 0.0185 seconds
+Average Parallel Time: 0.5365 seconds
 
 Vertex Count: 12000, Edge Ratio: 5, Delta: 2, CPUs: 4
-Average Sequential Time: 0.0327 seconds
-Average Parallel Time: 0.6018 seconds
+Average Sequential Time: 0.0993 seconds
+Average Parallel Time: 0.6254 seconds
 
 Vertex Count: 12000, Edge Ratio: 10, Delta: 2, CPUs: 4
-Average Sequential Time: 0.0616 seconds
-Average Parallel Time: 0.6283 seconds
+Average Sequential Time: 0.1664 seconds
+Average Parallel Time: 0.6536 seconds
 
 Vertex Count: 12000, Edge Ratio: 25, Delta: 2, CPUs: 4
-Average Sequential Time: 0.1785 seconds
-Average Parallel Time: 0.7316 seconds
+Average Sequential Time: 0.3731 seconds
+Average Parallel Time: 0.7849 seconds
 
 Vertex Count: 12000, Edge Ratio: 1, Delta: 2, CPUs: 8
-Average Sequential Time: 0.0025 seconds
-Average Parallel Time: 0.6053 seconds
+Average Sequential Time: 0.0208 seconds
+Average Parallel Time: 0.6195 seconds
 
 Vertex Count: 12000, Edge Ratio: 5, Delta: 2, CPUs: 8
-Average Sequential Time: 0.0322 seconds
-Average Parallel Time: 0.6872 seconds
+Average Sequential Time: 0.1013 seconds
+Average Parallel Time: 0.7140 seconds
 
 Vertex Count: 12000, Edge Ratio: 10, Delta: 2, CPUs: 8
-Average Sequential Time: 0.0612 seconds
-Average Parallel Time: 0.7059 seconds
+Average Sequential Time: 0.1689 seconds
+Average Parallel Time: 0.7407 seconds
 
 Vertex Count: 12000, Edge Ratio: 25, Delta: 2, CPUs: 8
-Average Sequential Time: 0.1820 seconds
-Average Parallel Time: 0.7978 seconds
+Average Sequential Time: 0.3823 seconds
+Average Parallel Time: 0.8527 seconds
 
 Vertex Count: 12000, Edge Ratio: 1, Delta: 2, CPUs: 16
-Average Sequential Time: 0.0026 seconds
-Average Parallel Time: 0.8511 seconds
+Average Sequential Time: 0.0231 seconds
+Average Parallel Time: 0.8829 seconds
 
 Vertex Count: 12000, Edge Ratio: 5, Delta: 2, CPUs: 16
-Average Sequential Time: 0.0340 seconds
-Average Parallel Time: 0.9798 seconds
+Average Sequential Time: 0.1022 seconds
+Average Parallel Time: 0.9975 seconds
 
 Vertex Count: 12000, Edge Ratio: 10, Delta: 2, CPUs: 16
-Average Sequential Time: 0.0645 seconds
-Average Parallel Time: 0.9896 seconds
+Average Sequential Time: 0.1692 seconds
+Average Parallel Time: 1.0141 seconds
 
 Vertex Count: 12000, Edge Ratio: 25, Delta: 2, CPUs: 16
-Average Sequential Time: 0.1867 seconds
-Average Parallel Time: 1.0912 seconds
+Average Sequential Time: 0.4000 seconds
+Average Parallel Time: 1.1153 seconds
 
 Vertex Count: 120000, Edge Ratio: 1, Delta: 2, CPUs: 2
-Average Sequential Time: 0.0304 seconds
-Average Parallel Time: 0.6882 seconds
-
-Vertex Count: 120000, Edge Ratio: 5, Delta: 2, CPUs: 2
-Average Sequential Time: 0.5758 seconds
-Average Parallel Time: 1.6600 seconds
-
-Vertex Count: 120000, Edge Ratio: 10, Delta: 2, CPUs: 2
-Average Sequential Time: 1.2533 seconds
-Average Parallel Time: 2.4627 seconds
-
-Vertex Count: 120000, Edge Ratio: 25, Delta: 2, CPUs: 2
-Average Sequential Time: 3.3735 seconds
-Average Parallel Time: 4.7309 seconds
-
-Vertex Count: 120000, Edge Ratio: 1, Delta: 2, CPUs: 4
-Average Sequential Time: 0.0347 seconds
-Average Parallel Time: 0.7205 seconds
-
-Vertex Count: 120000, Edge Ratio: 5, Delta: 2, CPUs: 4
-Average Sequential Time: 0.5826 seconds
-Average Parallel Time: 1.5378 seconds
-
-Vertex Count: 120000, Edge Ratio: 10, Delta: 2, CPUs: 4
-Average Sequential Time: 1.2375 seconds
-Average Parallel Time: 2.1242 seconds
-
-Vertex Count: 120000, Edge Ratio: 25, Delta: 2, CPUs: 4
-Average Sequential Time: 3.4249 seconds
-Average Parallel Time: 3.8332 seconds
-
-Vertex Count: 120000, Edge Ratio: 1, Delta: 2, CPUs: 8
-Average Sequential Time: 0.0330 seconds
-Average Parallel Time: 0.8224 seconds
-
-Vertex Count: 120000, Edge Ratio: 5, Delta: 2, CPUs: 8
-Average Sequential Time: 0.6062 seconds
-Average Parallel Time: 1.5660 seconds
-
-Vertex Count: 120000, Edge Ratio: 10, Delta: 2, CPUs: 8
-Average Sequential Time: 1.2251 seconds
-Average Parallel Time: 2.0586 seconds
-
-Vertex Count: 120000, Edge Ratio: 25, Delta: 2, CPUs: 8
-Average Sequential Time: 3.4074 seconds
-Average Parallel Time: 3.4879 seconds
-
-Vertex Count: 120000, Edge Ratio: 1, Delta: 2, CPUs: 16
-Average Sequential Time: 0.0389 seconds
-Average Parallel Time: 1.0645 seconds
-
-Vertex Count: 120000, Edge Ratio: 5, Delta: 2, CPUs: 16
-Average Sequential Time: 0.5940 seconds
-Average Parallel Time: 1.8472 seconds
-
-Vertex Count: 120000, Edge Ratio: 10, Delta: 2, CPUs: 16
-Average Sequential Time: 1.2369 seconds
-Average Parallel Time: 2.3246 seconds
-
-Vertex Count: 120000, Edge Ratio: 25, Delta: 2, CPUs: 16
-Average Sequential Time: 3.4148 seconds
-Average Parallel Time: 3.7253 seconds
-
-Vertex Count: 1200000, Edge Ratio: 1, Delta: 2, CPUs: 2
-Average Sequential Time: 0.4451 seconds
-Average Parallel Time: 3.1709 seconds
-
-Vertex Count: 1200000, Edge Ratio: 5, Delta: 2, CPUs: 2
-Average Sequential Time: 9.2252 seconds
-Average Parallel Time: 13.4437 seconds
-
-Vertex Count: 1200000, Edge Ratio: 10, Delta: 2, CPUs: 2
-Average Sequential Time: 18.9603 seconds
-Average Parallel Time: 22.9571 seconds
-
-Vertex Count: 1200000, Edge Ratio: 25, Delta: 2, CPUs: 2
-Average Sequential Time: 51.4900 seconds
-Average Parallel Time: 48.7772 seconds
-
-Vertex Count: 1200000, Edge Ratio: 1, Delta: 2, CPUs: 4
-Average Sequential Time: 0.4153 seconds
-Average Parallel Time: 3.4492 seconds
-
-Vertex Count: 1200000, Edge Ratio: 5, Delta: 2, CPUs: 4
-Average Sequential Time: 9.4316 seconds
-Average Parallel Time: 11.6130 seconds
-
-Vertex Count: 1200000, Edge Ratio: 10, Delta: 2, CPUs: 4
-Average Sequential Time: 19.0174 seconds
-Average Parallel Time: 18.9489 seconds
-
-Vertex Count: 1200000, Edge Ratio: 25, Delta: 2, CPUs: 4
-Average Sequential Time: 52.0107 seconds
-Average Parallel Time: 39.1015 seconds
-
-Vertex Count: 1200000, Edge Ratio: 1, Delta: 2, CPUs: 8
-Average Sequential Time: 0.4527 seconds
-Average Parallel Time: 3.5755 seconds
-
-Vertex Count: 1200000, Edge Ratio: 5, Delta: 2, CPUs: 8
-Average Sequential Time: 9.2406 seconds
-Average Parallel Time: 11.0682 seconds
-
-Vertex Count: 1200000, Edge Ratio: 10, Delta: 2, CPUs: 8
-Average Sequential Time: 19.8862 seconds
-Average Parallel Time: 17.3467 seconds
-
-Vertex Count: 1200000, Edge Ratio: 25, Delta: 2, CPUs: 8
-Average Sequential Time: 52.4194 seconds
-Average Parallel Time: 33.8112 seconds
-
-Vertex Count: 1200000, Edge Ratio: 1, Delta: 2, CPUs: 16
-Average Sequential Time: 0.5062 seconds
-Average Parallel Time: 4.1739 seconds
-
-Vertex Count: 1200000, Edge Ratio: 5, Delta: 2, CPUs: 16
-Average Sequential Time: 9.4956 seconds
-Average Parallel Time: 11.2852 seconds
-
-Vertex Count: 1200000, Edge Ratio: 10, Delta: 2, CPUs: 16
-Average Sequential Time: 19.3535 seconds
-Average Parallel Time: 17.0558 seconds
-
-Vertex Count: 1200000, Edge Ratio: 25, Delta: 2, CPUs: 16
-Average Sequential Time: 52.4995 seconds
-Average Parallel Time: 31.4293 seconds
-
-Vertex Count: 12000, Edge Ratio: 1, Delta: 5, CPUs: 2
-Average Sequential Time: 0.0154 seconds
-Average Parallel Time: 0.5127 seconds
-
-Vertex Count: 12000, Edge Ratio: 5, Delta: 5, CPUs: 2
-Average Sequential Time: 0.0326 seconds
-Average Parallel Time: 0.5788 seconds
-
-Vertex Count: 12000, Edge Ratio: 10, Delta: 5, CPUs: 2
-Average Sequential Time: 0.0656 seconds
-Average Parallel Time: 0.6263 seconds
-
-Vertex Count: 12000, Edge Ratio: 25, Delta: 5, CPUs: 2
-Average Sequential Time: 0.1954 seconds
-Average Parallel Time: 0.7773 seconds
-
-Vertex Count: 12000, Edge Ratio: 1, Delta: 5, CPUs: 4
-Average Sequential Time: 0.0025 seconds
-Average Parallel Time: 0.5189 seconds
-
-Vertex Count: 12000, Edge Ratio: 5, Delta: 5, CPUs: 4
-Average Sequential Time: 0.0324 seconds
-Average Parallel Time: 0.5824 seconds
-
-Vertex Count: 12000, Edge Ratio: 10, Delta: 5, CPUs: 4
-Average Sequential Time: 0.0647 seconds
-Average Parallel Time: 0.6116 seconds
-
-Vertex Count: 12000, Edge Ratio: 25, Delta: 5, CPUs: 4
-Average Sequential Time: 0.1976 seconds
-Average Parallel Time: 0.7217 seconds
-
-Vertex Count: 12000, Edge Ratio: 1, Delta: 5, CPUs: 8
-Average Sequential Time: 0.0026 seconds
-Average Parallel Time: 0.6043 seconds
-
-Vertex Count: 12000, Edge Ratio: 5, Delta: 5, CPUs: 8
-Average Sequential Time: 0.0339 seconds
-Average Parallel Time: 0.6607 seconds
-
-Vertex Count: 12000, Edge Ratio: 10, Delta: 5, CPUs: 8
-Average Sequential Time: 0.0652 seconds
-Average Parallel Time: 0.6915 seconds
-
-Vertex Count: 12000, Edge Ratio: 25, Delta: 5, CPUs: 8
-Average Sequential Time: 0.1939 seconds
-Average Parallel Time: 0.7815 seconds
-
-Vertex Count: 12000, Edge Ratio: 1, Delta: 5, CPUs: 16
-Average Sequential Time: 0.0029 seconds
-Average Parallel Time: 0.8611 seconds
-
-Vertex Count: 12000, Edge Ratio: 5, Delta: 5, CPUs: 16
-Average Sequential Time: 0.0341 seconds
-Average Parallel Time: 0.9650 seconds
-
-Vertex Count: 12000, Edge Ratio: 10, Delta: 5, CPUs: 16
-Average Sequential Time: 0.0688 seconds
-Average Parallel Time: 0.9523 seconds
-
-Vertex Count: 12000, Edge Ratio: 25, Delta: 5, CPUs: 16
-Average Sequential Time: 0.1997 seconds
-Average Parallel Time: 1.0649 seconds
-
-Vertex Count: 120000, Edge Ratio: 1, Delta: 5, CPUs: 2
-Average Sequential Time: 0.0326 seconds
-Average Parallel Time: 0.7204 seconds
-
-Vertex Count: 120000, Edge Ratio: 5, Delta: 5, CPUs: 2
-Average Sequential Time: 0.6195 seconds
-Average Parallel Time: 1.6427 seconds
-
-Vertex Count: 120000, Edge Ratio: 10, Delta: 5, CPUs: 2
-Average Sequential Time: 1.3510 seconds
-Average Parallel Time: 2.4203 seconds
-
-Vertex Count: 120000, Edge Ratio: 25, Delta: 5, CPUs: 2
-Average Sequential Time: 3.6503 seconds
-Average Parallel Time: 4.7437 seconds
-
-Vertex Count: 120000, Edge Ratio: 1, Delta: 5, CPUs: 4
-Average Sequential Time: 0.0342 seconds
+Average Sequential Time: 0.2074 seconds
 Average Parallel Time: 0.7542 seconds
 
+Vertex Count: 120000, Edge Ratio: 5, Delta: 2, CPUs: 2
+Average Sequential Time: 1.2175 seconds
+Average Parallel Time: 1.6932 seconds
+
+Vertex Count: 120000, Edge Ratio: 10, Delta: 2, CPUs: 2
+Average Sequential Time: 2.1073 seconds
+Average Parallel Time: 2.3871 seconds
+
+Vertex Count: 120000, Edge Ratio: 25, Delta: 2, CPUs: 2
+Average Sequential Time: 5.1600 seconds
+Average Parallel Time: 4.9227 seconds
+
+Vertex Count: 120000, Edge Ratio: 1, Delta: 2, CPUs: 4
+Average Sequential Time: 0.2070 seconds
+Average Parallel Time: 0.7298 seconds
+
+Vertex Count: 120000, Edge Ratio: 5, Delta: 2, CPUs: 4
+Average Sequential Time: 1.2339 seconds
+Average Parallel Time: 1.5429 seconds
+
+Vertex Count: 120000, Edge Ratio: 10, Delta: 2, CPUs: 4
+Average Sequential Time: 2.1310 seconds
+Average Parallel Time: 2.1211 seconds
+
+Vertex Count: 120000, Edge Ratio: 25, Delta: 2, CPUs: 4
+Average Sequential Time: 5.2504 seconds
+Average Parallel Time: 3.8621 seconds
+
+Vertex Count: 120000, Edge Ratio: 1, Delta: 2, CPUs: 8
+Average Sequential Time: 0.2657 seconds
+Average Parallel Time: 0.8126 seconds
+
+Vertex Count: 120000, Edge Ratio: 5, Delta: 2, CPUs: 8
+Average Sequential Time: 1.2443 seconds
+Average Parallel Time: 1.6207 seconds
+
+Vertex Count: 120000, Edge Ratio: 10, Delta: 2, CPUs: 8
+Average Sequential Time: 2.1368 seconds
+Average Parallel Time: 2.1146 seconds
+
+Vertex Count: 120000, Edge Ratio: 25, Delta: 2, CPUs: 8
+Average Sequential Time: 5.2215 seconds
+Average Parallel Time: 3.5718 seconds
+
+Vertex Count: 120000, Edge Ratio: 1, Delta: 2, CPUs: 16
+Average Sequential Time: 0.2838 seconds
+Average Parallel Time: 1.1002 seconds
+
+Vertex Count: 120000, Edge Ratio: 5, Delta: 2, CPUs: 16
+Average Sequential Time: 1.3092 seconds
+Average Parallel Time: 1.8856 seconds
+
+Vertex Count: 120000, Edge Ratio: 10, Delta: 2, CPUs: 16
+Average Sequential Time: 2.1716 seconds
+Average Parallel Time: 2.3716 seconds
+
+Vertex Count: 120000, Edge Ratio: 25, Delta: 2, CPUs: 16
+Average Sequential Time: 5.2027 seconds
+Average Parallel Time: 3.7700 seconds
+
+Vertex Count: 1200000, Edge Ratio: 1, Delta: 2, CPUs: 2
+Average Sequential Time: 2.7738 seconds
+Average Parallel Time: 3.3016 seconds
+
+Vertex Count: 1200000, Edge Ratio: 5, Delta: 2, CPUs: 2
+Average Sequential Time: 14.4743 seconds
+Average Parallel Time: 13.5128 seconds
+
+Vertex Count: 1200000, Edge Ratio: 10, Delta: 2, CPUs: 2
+Average Sequential Time: 25.7080 seconds
+Average Parallel Time: 22.7062 seconds
+
+Vertex Count: 1200000, Edge Ratio: 25, Delta: 2, CPUs: 2
+Average Sequential Time: 58.4605 seconds
+Average Parallel Time: 48.8290 seconds
+
+Vertex Count: 1200000, Edge Ratio: 1, Delta: 2, CPUs: 4
+Average Sequential Time: 2.8648 seconds
+Average Parallel Time: 3.4579 seconds
+
+Vertex Count: 1200000, Edge Ratio: 5, Delta: 2, CPUs: 4
+Average Sequential Time: 14.5997 seconds
+Average Parallel Time: 11.4013 seconds
+
+Vertex Count: 1200000, Edge Ratio: 10, Delta: 2, CPUs: 4
+Average Sequential Time: 26.0768 seconds
+Average Parallel Time: 18.6859 seconds
+
+Vertex Count: 1200000, Edge Ratio: 25, Delta: 2, CPUs: 4
+Average Sequential Time: 59.4673 seconds
+Average Parallel Time: 38.4302 seconds
+
+Vertex Count: 1200000, Edge Ratio: 1, Delta: 2, CPUs: 8
+Average Sequential Time: 3.1432 seconds
+Average Parallel Time: 3.7644 seconds
+
+Vertex Count: 1200000, Edge Ratio: 5, Delta: 2, CPUs: 8
+Average Sequential Time: 14.8920 seconds
+Average Parallel Time: 11.1490 seconds
+
+Vertex Count: 1200000, Edge Ratio: 10, Delta: 2, CPUs: 8
+Average Sequential Time: 26.4090 seconds
+Average Parallel Time: 17.0733 seconds
+
+Vertex Count: 1200000, Edge Ratio: 25, Delta: 2, CPUs: 8
+Average Sequential Time: 59.6852 seconds
+Average Parallel Time: 33.8552 seconds
+
+Vertex Count: 1200000, Edge Ratio: 1, Delta: 2, CPUs: 16
+Average Sequential Time: 3.4094 seconds
+Average Parallel Time: 4.3233 seconds
+
+Vertex Count: 1200000, Edge Ratio: 5, Delta: 2, CPUs: 16
+Average Sequential Time: 14.7310 seconds
+Average Parallel Time: 11.2628 seconds
+
+Vertex Count: 1200000, Edge Ratio: 10, Delta: 2, CPUs: 16
+Average Sequential Time: 26.4827 seconds
+Average Parallel Time: 16.5084 seconds
+
+Vertex Count: 1200000, Edge Ratio: 25, Delta: 2, CPUs: 16
+Average Sequential Time: 59.2470 seconds
+Average Parallel Time: 31.9519 seconds
+
+Vertex Count: 12000, Edge Ratio: 1, Delta: 5, CPUs: 2
+Average Sequential Time: 0.0226 seconds
+Average Parallel Time: 0.5223 seconds
+
+Vertex Count: 12000, Edge Ratio: 5, Delta: 5, CPUs: 2
+Average Sequential Time: 0.1026 seconds
+Average Parallel Time: 0.5961 seconds
+
+Vertex Count: 12000, Edge Ratio: 10, Delta: 5, CPUs: 2
+Average Sequential Time: 0.1714 seconds
+Average Parallel Time: 0.6499 seconds
+
+Vertex Count: 12000, Edge Ratio: 25, Delta: 5, CPUs: 2
+Average Sequential Time: 0.3880 seconds
+Average Parallel Time: 0.8197 seconds
+
+Vertex Count: 12000, Edge Ratio: 1, Delta: 5, CPUs: 4
+Average Sequential Time: 0.0191 seconds
+Average Parallel Time: 0.5367 seconds
+
+Vertex Count: 12000, Edge Ratio: 5, Delta: 5, CPUs: 4
+Average Sequential Time: 0.1056 seconds
+Average Parallel Time: 0.6108 seconds
+
+Vertex Count: 12000, Edge Ratio: 10, Delta: 5, CPUs: 4
+Average Sequential Time: 0.1686 seconds
+Average Parallel Time: 0.6403 seconds
+
+Vertex Count: 12000, Edge Ratio: 25, Delta: 5, CPUs: 4
+Average Sequential Time: 0.3996 seconds
+Average Parallel Time: 0.7686 seconds
+
+Vertex Count: 12000, Edge Ratio: 1, Delta: 5, CPUs: 8
+Average Sequential Time: 0.0229 seconds
+Average Parallel Time: 0.6259 seconds
+
+Vertex Count: 12000, Edge Ratio: 5, Delta: 5, CPUs: 8
+Average Sequential Time: 0.1021 seconds
+Average Parallel Time: 0.6946 seconds
+
+Vertex Count: 12000, Edge Ratio: 10, Delta: 5, CPUs: 8
+Average Sequential Time: 0.1693 seconds
+Average Parallel Time: 0.7168 seconds
+
+Vertex Count: 12000, Edge Ratio: 25, Delta: 5, CPUs: 8
+Average Sequential Time: 0.4033 seconds
+Average Parallel Time: 0.8196 seconds
+
+Vertex Count: 12000, Edge Ratio: 1, Delta: 5, CPUs: 16
+Average Sequential Time: 0.0207 seconds
+Average Parallel Time: 0.8828 seconds
+
+Vertex Count: 12000, Edge Ratio: 5, Delta: 5, CPUs: 16
+Average Sequential Time: 0.1082 seconds
+Average Parallel Time: 0.9654 seconds
+
+Vertex Count: 12000, Edge Ratio: 10, Delta: 5, CPUs: 16
+Average Sequential Time: 0.1744 seconds
+Average Parallel Time: 0.9938 seconds
+
+Vertex Count: 12000, Edge Ratio: 25, Delta: 5, CPUs: 16
+Average Sequential Time: 0.3995 seconds
+Average Parallel Time: 1.0981 seconds
+
+Vertex Count: 120000, Edge Ratio: 1, Delta: 5, CPUs: 2
+Average Sequential Time: 0.2088 seconds
+Average Parallel Time: 0.7251 seconds
+
+Vertex Count: 120000, Edge Ratio: 5, Delta: 5, CPUs: 2
+Average Sequential Time: 1.2776 seconds
+Average Parallel Time: 1.6554 seconds
+
+Vertex Count: 120000, Edge Ratio: 10, Delta: 5, CPUs: 2
+Average Sequential Time: 2.2487 seconds
+Average Parallel Time: 2.4397 seconds
+
+Vertex Count: 120000, Edge Ratio: 25, Delta: 5, CPUs: 2
+Average Sequential Time: 5.4639 seconds
+Average Parallel Time: 4.8286 seconds
+
+Vertex Count: 120000, Edge Ratio: 1, Delta: 5, CPUs: 4
+Average Sequential Time: 0.2427 seconds
+Average Parallel Time: 0.7420 seconds
+
 Vertex Count: 120000, Edge Ratio: 5, Delta: 5, CPUs: 4
-Average Sequential Time: 0.6358 seconds
-Average Parallel Time: 1.5057 seconds
+Average Sequential Time: 1.2792 seconds
+Average Parallel Time: 1.5287 seconds
 
 Vertex Count: 120000, Edge Ratio: 10, Delta: 5, CPUs: 4
-Average Sequential Time: 1.3461 seconds
-Average Parallel Time: 2.1613 seconds
+Average Sequential Time: 2.2562 seconds
+Average Parallel Time: 2.1193 seconds
 
 Vertex Count: 120000, Edge Ratio: 25, Delta: 5, CPUs: 4
-Average Sequential Time: 3.6995 seconds
-Average Parallel Time: 3.9915 seconds
+Average Sequential Time: 5.5549 seconds
+Average Parallel Time: 3.8688 seconds
 
 Vertex Count: 120000, Edge Ratio: 1, Delta: 5, CPUs: 8
-Average Sequential Time: 0.0382 seconds
-Average Parallel Time: 0.8102 seconds
+Average Sequential Time: 0.2331 seconds
+Average Parallel Time: 0.8644 seconds
 
 Vertex Count: 120000, Edge Ratio: 5, Delta: 5, CPUs: 8
-Average Sequential Time: 0.6398 seconds
-Average Parallel Time: 1.5345 seconds
+Average Sequential Time: 1.2898 seconds
+Average Parallel Time: 1.5573 seconds
 
 Vertex Count: 120000, Edge Ratio: 10, Delta: 5, CPUs: 8
-Average Sequential Time: 1.3492 seconds
-Average Parallel Time: 2.0614 seconds
+Average Sequential Time: 2.3133 seconds
+Average Parallel Time: 2.1384 seconds
 
 Vertex Count: 120000, Edge Ratio: 25, Delta: 5, CPUs: 8
-Average Sequential Time: 3.6963 seconds
-Average Parallel Time: 3.5617 seconds
+Average Sequential Time: 5.5417 seconds
+Average Parallel Time: 3.6069 seconds
 
 Vertex Count: 120000, Edge Ratio: 1, Delta: 5, CPUs: 16
-Average Sequential Time: 0.0366 seconds
-Average Parallel Time: 1.0733 seconds
+Average Sequential Time: 0.2644 seconds
+Average Parallel Time: 1.1199 seconds
 
 Vertex Count: 120000, Edge Ratio: 5, Delta: 5, CPUs: 16
-Average Sequential Time: 0.6445 seconds
-Average Parallel Time: 1.7690 seconds
+Average Sequential Time: 1.2857 seconds
+Average Parallel Time: 1.8111 seconds
 
 Vertex Count: 120000, Edge Ratio: 10, Delta: 5, CPUs: 16
-Average Sequential Time: 1.3475 seconds
-Average Parallel Time: 2.2899 seconds
+Average Sequential Time: 2.3578 seconds
+Average Parallel Time: 2.2583 seconds
 
 Vertex Count: 120000, Edge Ratio: 25, Delta: 5, CPUs: 16
-Average Sequential Time: 3.6899 seconds
-Average Parallel Time: 3.7680 seconds
+Average Sequential Time: 5.4645 seconds
+Average Parallel Time: 3.6644 seconds
 
 Vertex Count: 1200000, Edge Ratio: 1, Delta: 5, CPUs: 2
-Average Sequential Time: 0.4401 seconds
-Average Parallel Time: 3.2520 seconds
+Average Sequential Time: 2.7383 seconds
+Average Parallel Time: 3.3715 seconds
 
 Vertex Count: 1200000, Edge Ratio: 5, Delta: 5, CPUs: 2
-Average Sequential Time: 10.0226 seconds
-Average Parallel Time: 13.8097 seconds
+Average Sequential Time: 15.0773 seconds
+Average Parallel Time: 13.8576 seconds
 
 Vertex Count: 1200000, Edge Ratio: 10, Delta: 5, CPUs: 2
-Average Sequential Time: 20.6391 seconds
-Average Parallel Time: 22.8369 seconds
+Average Sequential Time: 26.6798 seconds
+Average Parallel Time: 22.7978 seconds
 
 Vertex Count: 1200000, Edge Ratio: 25, Delta: 5, CPUs: 2
-Average Sequential Time: 53.4329 seconds
-Average Parallel Time: 49.3623 seconds
+Average Sequential Time: 60.4430 seconds
+Average Parallel Time: 49.7800 seconds
 
 Vertex Count: 1200000, Edge Ratio: 1, Delta: 5, CPUs: 4
-Average Sequential Time: 0.4165 seconds
-Average Parallel Time: 3.5017 seconds
+Average Sequential Time: 2.8260 seconds
+Average Parallel Time: 3.2351 seconds
 
 Vertex Count: 1200000, Edge Ratio: 5, Delta: 5, CPUs: 4
-Average Sequential Time: 10.1284 seconds
-Average Parallel Time: 11.7249 seconds
+Average Sequential Time: 15.3670 seconds
+Average Parallel Time: 11.7636 seconds
 
 Vertex Count: 1200000, Edge Ratio: 10, Delta: 5, CPUs: 4
-Average Sequential Time: 20.8856 seconds
-Average Parallel Time: 19.1527 seconds
+Average Sequential Time: 26.6846 seconds
+Average Parallel Time: 18.8916 seconds
 
 Vertex Count: 1200000, Edge Ratio: 25, Delta: 5, CPUs: 4
-Average Sequential Time: 53.2469 seconds
-Average Parallel Time: 38.9009 seconds
+Average Sequential Time: 60.2862 seconds
+Average Parallel Time: 38.7998 seconds
 
 Vertex Count: 1200000, Edge Ratio: 1, Delta: 5, CPUs: 8
-Average Sequential Time: 0.4374 seconds
-Average Parallel Time: 3.9300 seconds
+Average Sequential Time: 3.2039 seconds
+Average Parallel Time: 3.6659 seconds
 
 Vertex Count: 1200000, Edge Ratio: 5, Delta: 5, CPUs: 8
-Average Sequential Time: 10.2163 seconds
-Average Parallel Time: 10.9508 seconds
+Average Sequential Time: 15.4857 seconds
+Average Parallel Time: 10.8550 seconds
 
 Vertex Count: 1200000, Edge Ratio: 10, Delta: 5, CPUs: 8
-Average Sequential Time: 20.9953 seconds
-Average Parallel Time: 16.9763 seconds
+Average Sequential Time: 27.2041 seconds
+Average Parallel Time: 16.7808 seconds
 
 Vertex Count: 1200000, Edge Ratio: 25, Delta: 5, CPUs: 8
-Average Sequential Time: 53.3564 seconds
-Average Parallel Time: 33.7067 seconds
+Average Sequential Time: 61.1204 seconds
+Average Parallel Time: 33.1122 seconds
 
 Vertex Count: 1200000, Edge Ratio: 1, Delta: 5, CPUs: 16
-Average Sequential Time: 0.5003 seconds
-Average Parallel Time: 4.1955 seconds
+Average Sequential Time: 3.3285 seconds
+Average Parallel Time: 4.0712 seconds
 
 Vertex Count: 1200000, Edge Ratio: 5, Delta: 5, CPUs: 16
-Average Sequential Time: 10.3309 seconds
-Average Parallel Time: 11.0212 seconds
+Average Sequential Time: 15.5617 seconds
+Average Parallel Time: 10.9819 seconds
 
 Vertex Count: 1200000, Edge Ratio: 10, Delta: 5, CPUs: 16
-Average Sequential Time: 21.0433 seconds
-Average Parallel Time: 16.2832 seconds
+Average Sequential Time: 27.1125 seconds
+Average Parallel Time: 16.2250 seconds
 
 Vertex Count: 1200000, Edge Ratio: 25, Delta: 5, CPUs: 16
-Average Sequential Time: 53.6122 seconds
-Average Parallel Time: 30.9087 seconds
+Average Sequential Time: 62.4027 seconds
+Average Parallel Time: 31.1990 seconds
 
 Vertex Count: 12000, Edge Ratio: 1, Delta: 10, CPUs: 2
-Average Sequential Time: 0.0156 seconds
-Average Parallel Time: 0.5152 seconds
+Average Sequential Time: 0.0243 seconds
+Average Parallel Time: 0.5219 seconds
 
 Vertex Count: 12000, Edge Ratio: 5, Delta: 10, CPUs: 2
-Average Sequential Time: 0.0337 seconds
-Average Parallel Time: 0.5740 seconds
+Average Sequential Time: 0.1053 seconds
+Average Parallel Time: 0.5921 seconds
 
 Vertex Count: 12000, Edge Ratio: 10, Delta: 10, CPUs: 2
-Average Sequential Time: 0.0684 seconds
-Average Parallel Time: 0.6156 seconds
+Average Sequential Time: 0.1751 seconds
+Average Parallel Time: 0.6401 seconds
 
 Vertex Count: 12000, Edge Ratio: 25, Delta: 10, CPUs: 2
-Average Sequential Time: 0.2146 seconds
-Average Parallel Time: 0.7723 seconds
+Average Sequential Time: 0.4333 seconds
+Average Parallel Time: 0.8203 seconds
 
 Vertex Count: 12000, Edge Ratio: 1, Delta: 10, CPUs: 4
-Average Sequential Time: 0.0027 seconds
-Average Parallel Time: 0.5163 seconds
+Average Sequential Time: 0.0173 seconds
+Average Parallel Time: 0.5365 seconds
 
 Vertex Count: 12000, Edge Ratio: 5, Delta: 10, CPUs: 4
-Average Sequential Time: 0.0332 seconds
-Average Parallel Time: 0.5746 seconds
+Average Sequential Time: 0.1028 seconds
+Average Parallel Time: 0.5913 seconds
 
 Vertex Count: 12000, Edge Ratio: 10, Delta: 10, CPUs: 4
-Average Sequential Time: 0.0697 seconds
-Average Parallel Time: 0.6068 seconds
+Average Sequential Time: 0.1710 seconds
+Average Parallel Time: 0.6346 seconds
 
 Vertex Count: 12000, Edge Ratio: 25, Delta: 10, CPUs: 4
-Average Sequential Time: 0.2044 seconds
-Average Parallel Time: 0.7258 seconds
+Average Sequential Time: 0.4315 seconds
+Average Parallel Time: 0.7784 seconds
 
 Vertex Count: 12000, Edge Ratio: 1, Delta: 10, CPUs: 8
-Average Sequential Time: 0.0027 seconds
-Average Parallel Time: 0.5992 seconds
+Average Sequential Time: 0.0177 seconds
+Average Parallel Time: 0.6244 seconds
 
 Vertex Count: 12000, Edge Ratio: 5, Delta: 10, CPUs: 8
-Average Sequential Time: 0.0348 seconds
-Average Parallel Time: 0.6571 seconds
+Average Sequential Time: 0.1010 seconds
+Average Parallel Time: 0.6842 seconds
 
 Vertex Count: 12000, Edge Ratio: 10, Delta: 10, CPUs: 8
-Average Sequential Time: 0.0711 seconds
-Average Parallel Time: 0.6816 seconds
+Average Sequential Time: 0.1758 seconds
+Average Parallel Time: 0.7079 seconds
 
 Vertex Count: 12000, Edge Ratio: 25, Delta: 10, CPUs: 8
-Average Sequential Time: 0.2076 seconds
-Average Parallel Time: 0.7827 seconds
+Average Sequential Time: 0.4371 seconds
+Average Parallel Time: 0.8248 seconds
 
 Vertex Count: 12000, Edge Ratio: 1, Delta: 10, CPUs: 16
-Average Sequential Time: 0.0031 seconds
-Average Parallel Time: 0.8521 seconds
+Average Sequential Time: 0.0243 seconds
+Average Parallel Time: 0.8817 seconds
 
 Vertex Count: 12000, Edge Ratio: 5, Delta: 10, CPUs: 16
-Average Sequential Time: 0.0340 seconds
-Average Parallel Time: 0.9340 seconds
+Average Sequential Time: 0.1047 seconds
+Average Parallel Time: 0.9605 seconds
 
 Vertex Count: 12000, Edge Ratio: 10, Delta: 10, CPUs: 16
-Average Sequential Time: 0.0774 seconds
-Average Parallel Time: 0.9623 seconds
+Average Sequential Time: 0.1761 seconds
+Average Parallel Time: 0.9846 seconds
 
 Vertex Count: 12000, Edge Ratio: 25, Delta: 10, CPUs: 16
-Average Sequential Time: 0.2167 seconds
-Average Parallel Time: 1.0417 seconds
+Average Sequential Time: 0.4405 seconds
+Average Parallel Time: 1.0842 seconds
 
 Vertex Count: 120000, Edge Ratio: 1, Delta: 10, CPUs: 2
-Average Sequential Time: 0.0288 seconds
-Average Parallel Time: 0.6835 seconds
+Average Sequential Time: 0.2328 seconds
+Average Parallel Time: 0.7073 seconds
 
 Vertex Count: 120000, Edge Ratio: 5, Delta: 10, CPUs: 2
-Average Sequential Time: 0.6517 seconds
-Average Parallel Time: 1.6548 seconds
+Average Sequential Time: 1.2965 seconds
+Average Parallel Time: 1.6616 seconds
 
 Vertex Count: 120000, Edge Ratio: 10, Delta: 10, CPUs: 2
-Average Sequential Time: 1.4554 seconds
-Average Parallel Time: 2.4277 seconds
+Average Sequential Time: 2.3526 seconds
+Average Parallel Time: 2.4424 seconds
 
 Vertex Count: 120000, Edge Ratio: 25, Delta: 10, CPUs: 2
-Average Sequential Time: 3.8509 seconds
-Average Parallel Time: 4.9573 seconds
+Average Sequential Time: 5.7106 seconds
+Average Parallel Time: 4.8483 seconds
 
 Vertex Count: 120000, Edge Ratio: 1, Delta: 10, CPUs: 4
-Average Sequential Time: 0.0382 seconds
-Average Parallel Time: 0.7594 seconds
+Average Sequential Time: 0.2365 seconds
+Average Parallel Time: 0.7443 seconds
 
 Vertex Count: 120000, Edge Ratio: 5, Delta: 10, CPUs: 4
-Average Sequential Time: 0.6651 seconds
-Average Parallel Time: 1.4906 seconds
+Average Sequential Time: 1.3226 seconds
+Average Parallel Time: 1.4887 seconds
 
 Vertex Count: 120000, Edge Ratio: 10, Delta: 10, CPUs: 4
-Average Sequential Time: 1.4387 seconds
-Average Parallel Time: 2.0897 seconds
+Average Sequential Time: 2.4250 seconds
+Average Parallel Time: 2.1009 seconds
 
 Vertex Count: 120000, Edge Ratio: 25, Delta: 10, CPUs: 4
-Average Sequential Time: 3.7961 seconds
-Average Parallel Time: 4.0023 seconds
+Average Sequential Time: 5.7392 seconds
+Average Parallel Time: 3.9929 seconds
 
 Vertex Count: 120000, Edge Ratio: 1, Delta: 10, CPUs: 8
-Average Sequential Time: 0.0319 seconds
-Average Parallel Time: 0.8454 seconds
+Average Sequential Time: 0.2751 seconds
+Average Parallel Time: 0.8735 seconds
 
 Vertex Count: 120000, Edge Ratio: 5, Delta: 10, CPUs: 8
-Average Sequential Time: 0.6627 seconds
-Average Parallel Time: 1.4518 seconds
+Average Sequential Time: 1.3278 seconds
+Average Parallel Time: 1.5118 seconds
 
 Vertex Count: 120000, Edge Ratio: 10, Delta: 10, CPUs: 8
-Average Sequential Time: 1.4534 seconds
-Average Parallel Time: 2.0685 seconds
+Average Sequential Time: 2.4174 seconds
+Average Parallel Time: 2.0566 seconds
 
 Vertex Count: 120000, Edge Ratio: 25, Delta: 10, CPUs: 8
-Average Sequential Time: 3.7835 seconds
-Average Parallel Time: 3.5422 seconds
+Average Sequential Time: 5.7773 seconds
+Average Parallel Time: 3.6503 seconds
 
 Vertex Count: 120000, Edge Ratio: 1, Delta: 10, CPUs: 16
-Average Sequential Time: 0.0369 seconds
-Average Parallel Time: 1.0871 seconds
+Average Sequential Time: 0.2629 seconds
+Average Parallel Time: 1.1026 seconds
 
 Vertex Count: 120000, Edge Ratio: 5, Delta: 10, CPUs: 16
-Average Sequential Time: 0.6716 seconds
-Average Parallel Time: 1.7137 seconds
+Average Sequential Time: 1.3048 seconds
+Average Parallel Time: 1.7757 seconds
 
 Vertex Count: 120000, Edge Ratio: 10, Delta: 10, CPUs: 16
-Average Sequential Time: 1.4405 seconds
-Average Parallel Time: 2.2571 seconds
+Average Sequential Time: 2.4243 seconds
+Average Parallel Time: 2.2700 seconds
 
 Vertex Count: 120000, Edge Ratio: 25, Delta: 10, CPUs: 16
-Average Sequential Time: 3.8243 seconds
-Average Parallel Time: 3.6589 seconds
+Average Sequential Time: 5.7243 seconds
+Average Parallel Time: 3.6895 seconds
 
 Vertex Count: 1200000, Edge Ratio: 1, Delta: 10, CPUs: 2
-Average Sequential Time: 0.4479 seconds
-Average Parallel Time: 3.2127 seconds
+Average Sequential Time: 2.6992 seconds
+Average Parallel Time: 3.3024 seconds
 
 Vertex Count: 1200000, Edge Ratio: 5, Delta: 10, CPUs: 2
-Average Sequential Time: 10.2326 seconds
-Average Parallel Time: 13.7229 seconds
+Average Sequential Time: 15.3990 seconds
+Average Parallel Time: 13.6158 seconds
 
 Vertex Count: 1200000, Edge Ratio: 10, Delta: 10, CPUs: 2
-Average Sequential Time: 20.8425 seconds
-Average Parallel Time: 23.1295 seconds
+Average Sequential Time: 27.1631 seconds
+Average Parallel Time: 23.3735 seconds
 
 Vertex Count: 1200000, Edge Ratio: 25, Delta: 10, CPUs: 2
-Average Sequential Time: 52.6426 seconds
-Average Parallel Time: 49.9603 seconds
+Average Sequential Time: 61.7846 seconds
+Average Parallel Time: 50.3440 seconds
 
 Vertex Count: 1200000, Edge Ratio: 1, Delta: 10, CPUs: 4
-Average Sequential Time: 0.4263 seconds
-Average Parallel Time: 3.3883 seconds
+Average Sequential Time: 2.8658 seconds
+Average Parallel Time: 3.4803 seconds
 
 Vertex Count: 1200000, Edge Ratio: 5, Delta: 10, CPUs: 4
-Average Sequential Time: 10.3734 seconds
-Average Parallel Time: 11.5257 seconds
+Average Sequential Time: 15.5816 seconds
+Average Parallel Time: 11.4787 seconds
 
 Vertex Count: 1200000, Edge Ratio: 10, Delta: 10, CPUs: 4
-Average Sequential Time: 20.9852 seconds
-Average Parallel Time: 18.6265 seconds
+Average Sequential Time: 26.9879 seconds
+Average Parallel Time: 18.6942 seconds
 
 Vertex Count: 1200000, Edge Ratio: 25, Delta: 10, CPUs: 4
-Average Sequential Time: 52.5116 seconds
-Average Parallel Time: 39.8256 seconds
+Average Sequential Time: 62.8593 seconds
+Average Parallel Time: 39.5774 seconds
 
 Vertex Count: 1200000, Edge Ratio: 1, Delta: 10, CPUs: 8
-Average Sequential Time: 0.4456 seconds
-Average Parallel Time: 3.6798 seconds
+Average Sequential Time: 3.0934 seconds
+Average Parallel Time: 3.6332 seconds
 
 Vertex Count: 1200000, Edge Ratio: 5, Delta: 10, CPUs: 8
-Average Sequential Time: 10.3724 seconds
-Average Parallel Time: 10.4753 seconds
+Average Sequential Time: 15.4195 seconds
+Average Parallel Time: 10.7823 seconds
 
 Vertex Count: 1200000, Edge Ratio: 10, Delta: 10, CPUs: 8
-Average Sequential Time: 21.0800 seconds
-Average Parallel Time: 16.7763 seconds
+Average Sequential Time: 27.1658 seconds
+Average Parallel Time: 16.5011 seconds
 
 Vertex Count: 1200000, Edge Ratio: 25, Delta: 10, CPUs: 8
-Average Sequential Time: 52.9015 seconds
-Average Parallel Time: 33.6150 seconds
+Average Sequential Time: 62.7969 seconds
+Average Parallel Time: 33.5435 seconds
 
 Vertex Count: 1200000, Edge Ratio: 1, Delta: 10, CPUs: 16
-Average Sequential Time: 0.4993 seconds
-Average Parallel Time: 3.9817 seconds
+Average Sequential Time: 3.3855 seconds
+Average Parallel Time: 4.1725 seconds
 
 Vertex Count: 1200000, Edge Ratio: 5, Delta: 10, CPUs: 16
-Average Sequential Time: 10.5468 seconds
-Average Parallel Time: 10.8863 seconds
+Average Sequential Time: 15.9953 seconds
+Average Parallel Time: 10.6722 seconds
 
 Vertex Count: 1200000, Edge Ratio: 10, Delta: 10, CPUs: 16
-Average Sequential Time: 21.1256 seconds
-Average Parallel Time: 16.1612 seconds
+Average Sequential Time: 27.3880 seconds
+Average Parallel Time: 15.7264 seconds
 
 Vertex Count: 1200000, Edge Ratio: 25, Delta: 10, CPUs: 16
-Average Sequential Time: 52.6088 seconds
-Average Parallel Time: 32.3999 seconds
+Average Sequential Time: 62.4122 seconds
+Average Parallel Time: 32.4376 seconds
 
 Delta Stepping Analysis Summary
-Total analysis time: 11470.00 seconds
+Total analysis time: 21011.12 seconds
