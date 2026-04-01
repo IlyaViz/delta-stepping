@@ -19,7 +19,7 @@ def validate_and_prepare_variables(
 
     if delta == -1:
         avg_weight = sum(flattened_weights) / len(flattened_weights)
-        delta = avg_weight / 50
+        delta = avg_weight / 6.8
 
     max_weight = max(flattened_weights)
     max_buckets = int(max_weight // delta) + 2
