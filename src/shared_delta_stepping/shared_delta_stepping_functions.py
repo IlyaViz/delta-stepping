@@ -78,6 +78,7 @@ def prepare_ndarrays(
     if set_defaults:
         shared_neighbours.fill(-1)
         shared_distances.fill(float("inf"))
+        shared_in_bucket.fill(False)
         shared_bucket_sizes.fill(0)
 
         shared_distances[source_vertex_index] = 0
