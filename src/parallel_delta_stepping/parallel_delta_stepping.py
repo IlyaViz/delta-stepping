@@ -305,10 +305,7 @@ def process_bucket(
                 vertex_index, distances_global[vertex_index]
             )
 
-            if (
-                current_dist == float("inf")
-                or int(current_dist // delta) % max_buckets != actual_bucket_index
-            ):
+            if int(current_dist // delta) % max_buckets != actual_bucket_index:
                 continue
 
             vertex_neighbour_indexes = neighbours_global[vertex_index]
@@ -366,8 +363,7 @@ def process_bucket(
         for bucket_index, vertices in local_buckets.items():
             for vertex_index in vertices:
                 if (
-                    distances_global[vertex_index] == float("inf")
-                    or int(distances_global[vertex_index] // delta) % max_buckets
+                    int(distances_global[vertex_index] // delta) % max_buckets
                     == bucket_index
                 ):
                     if not in_bucket_global[bucket_index, vertex_index]:

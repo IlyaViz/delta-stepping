@@ -95,11 +95,7 @@ def process_bucket(
 
         bucket_sizes[actual_bucket_index] -= 1
 
-        if (
-            distances[vertex_index] == float("inf")
-            or int(distances[vertex_index] // delta) % max_buckets
-            != actual_bucket_index
-        ):
+        if int(distances[vertex_index] // delta) % max_buckets != actual_bucket_index:
             continue
 
         vertex_neighbour_indexes = neighbours[vertex_index]
@@ -132,7 +128,7 @@ def process_bucket(
                         delta,
                         neighbour_index,
                         distances,
-                        buckets,    
+                        buckets,
                         bucket_sizes,
                         max_buckets,
                     )
