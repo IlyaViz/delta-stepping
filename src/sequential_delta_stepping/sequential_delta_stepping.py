@@ -10,7 +10,7 @@ from src.const.dtype import INT_TYPE, FLOAT_TYPE
 def sequential_delta_stepping(
     neighbours: list[list[int]],
     weights: list[list[float]],
-    source_vertex: int,
+    source_vertex_index: int,
     delta: float = -1,
 ) -> list[float]:
     (
@@ -18,7 +18,7 @@ def sequential_delta_stepping(
         max_degree,
         max_buckets,
         delta,
-    ) = validate_and_prepare_variables(neighbours, weights, source_vertex, delta)
+    ) = validate_and_prepare_variables(neighbours, weights, source_vertex_index, delta)
 
     neighbours, distances, weights, buckets, in_bucket, bucket_sizes = prepare_ndarrays(
         vertices_length,
@@ -27,12 +27,12 @@ def sequential_delta_stepping(
         set_defaults=True,
         neighbours=neighbours,
         weights=weights,
-        source_vertex_index=source_vertex,
+        source_vertex_index=source_vertex_index,
     )
 
     add_to_bucket(
         delta,
-        source_vertex,
+        source_vertex_index,
         distances,
         buckets,
         bucket_sizes,
