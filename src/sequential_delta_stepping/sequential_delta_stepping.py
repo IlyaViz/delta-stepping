@@ -20,7 +20,7 @@ def sequential_delta_stepping(
         delta,
     ) = validate_and_prepare_variables(neighbours, weights, source_vertex, delta)
 
-    neighbours, distances, weights, buckets, _, bucket_sizes = prepare_ndarrays(
+    neighbours, distances, weights, buckets, in_bucket, bucket_sizes = prepare_ndarrays(
         vertices_length,
         max_degree,
         max_buckets,
@@ -54,6 +54,7 @@ def sequential_delta_stepping(
             distances,
             weights,
             buckets,
+            in_bucket,
             bucket_sizes,
         )
 
@@ -81,6 +82,7 @@ def process_bucket(
     distances: ndarray[FLOAT_TYPE],
     weights: ndarray[FLOAT_TYPE],
     buckets: ndarray[INT_TYPE],
+    in_bucket: ndarray[bool],
     bucket_sizes: ndarray[INT_TYPE],
 ) -> None:
     heavy_edges = set()
@@ -88,6 +90,8 @@ def process_bucket(
     while bucket_sizes[actual_bucket_index] > 0:
         last_vertex_index = bucket_sizes[actual_bucket_index] - 1
         vertex_index = buckets[actual_bucket_index, last_vertex_index]
+
+        in_bucket[actual_bucket_index, vertex_index] = False
 
         bucket_sizes[actual_bucket_index] -= 1
 
@@ -119,14 +123,19 @@ def process_bucket(
                 edge_weight,
                 distances,
             ):
-                add_to_bucket(
-                    delta,
-                    neighbour_index,
-                    distances,
-                    buckets,
-                    bucket_sizes,
-                    max_buckets,
-                )
+                bucket_index = int(distances[neighbour_index] // delta) % max_buckets
+
+                if not in_bucket[bucket_index, neighbour_index]:
+                    in_bucket[bucket_index, neighbour_index] = True
+
+                    add_to_bucket(
+                        delta,
+                        neighbour_index,
+                        distances,
+                        buckets,    
+                        bucket_sizes,
+                        max_buckets,
+                    )
 
     for vertex_index, neighbour_index, edge_weight in heavy_edges:
         if relax_neighbour(
@@ -135,14 +144,19 @@ def process_bucket(
             edge_weight,
             distances,
         ):
-            add_to_bucket(
-                delta,
-                neighbour_index,
-                distances,
-                buckets,
-                bucket_sizes,
-                max_buckets,
-            )
+            bucket_index = int(distances[neighbour_index] // delta) % max_buckets
+
+            if not in_bucket[bucket_index, neighbour_index]:
+                in_bucket[bucket_index, neighbour_index] = True
+
+                add_to_bucket(
+                    delta,
+                    neighbour_index,
+                    distances,
+                    buckets,
+                    bucket_sizes,
+                    max_buckets,
+                )
 
 
 def relax_neighbour(
