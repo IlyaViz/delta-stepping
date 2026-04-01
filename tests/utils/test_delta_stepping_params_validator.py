@@ -4,8 +4,8 @@ from src.utils.delta_stepping_params_validator import (
 )
 
 
-def test_validate_incorrect_neighbours_length(test_graph):
-    neighbours, weights, _ = test_graph
+def test_validate_incorrect_neighbours_length(test_graphs):
+    neighbours, weights, _ = next(zip(*test_graphs))
 
     neighbours = []
 
@@ -13,8 +13,8 @@ def test_validate_incorrect_neighbours_length(test_graph):
         validate_delta_stepping_params(neighbours, weights, 0, 1)
 
 
-def test_validate_incorrect_neighbours(test_graph):
-    neighbours, weights, _ = test_graph
+def test_validate_incorrect_neighbours(test_graphs):
+    neighbours, weights, _ = next(zip(*test_graphs))
 
     del neighbours[0]
 
@@ -24,8 +24,8 @@ def test_validate_incorrect_neighbours(test_graph):
         validate_delta_stepping_params(neighbours, weights, 0, 1)
 
 
-def test_validate_incorrect_weights(test_graph):
-    neighbours, weights, _ = test_graph
+def test_validate_incorrect_weights(test_graphs):
+    neighbours, weights, _ = next(zip(*test_graphs))
 
     del weights[0]
 
@@ -35,8 +35,8 @@ def test_validate_incorrect_weights(test_graph):
         validate_delta_stepping_params(neighbours, weights, 0, 1)
 
 
-def test_validate_incorrect_source_vertex(test_graph):
-    neighbours, weights, _ = test_graph
+def test_validate_incorrect_source_vertex(test_graphs):
+    neighbours, weights, _ = next(zip(*test_graphs))
 
     with pytest.raises(ValueError, match="Source vertex index is out of bounds."):
         validate_delta_stepping_params(neighbours, weights, -1, 1)
@@ -46,8 +46,8 @@ def test_validate_incorrect_source_vertex(test_graph):
 
 
 @pytest.mark.parametrize("delta", [0, -2])
-def test_validate_incorrect_delta(test_graph, delta):
-    neighbours, weights, _ = test_graph
+def test_validate_incorrect_delta(test_graphs, delta):
+    neighbours, weights, _ = next(zip(*test_graphs))
 
     with pytest.raises(
         ValueError,
@@ -56,8 +56,8 @@ def test_validate_incorrect_delta(test_graph, delta):
         validate_delta_stepping_params(neighbours, weights, 0, delta)
 
 
-def test_validate_incorrect_weights_values(test_graph):
-    neighbours, weights, _ = test_graph
+def test_validate_incorrect_weights_values(test_graphs):
+    neighbours, weights, _ = next(zip(*test_graphs))
 
     weights[0][0] = -1
 
@@ -68,7 +68,7 @@ def test_validate_incorrect_weights_values(test_graph):
         validate_delta_stepping_params(neighbours, weights, 0, 1)
 
 
-def test_validate_correct_params(test_graph):
-    neighbours, weights, _ = test_graph
+def test_validate_correct_params(test_graphs):
+    neighbours, weights, _ = next(zip(*test_graphs))
 
     validate_delta_stepping_params(neighbours, weights, 0, 1)
