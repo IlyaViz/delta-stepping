@@ -323,7 +323,7 @@ def process_bucket(
                     local_heavy_edges.add((vertex_index, neighbour_index, edge_weight))
                     continue
 
-                if relax_neighbour(
+                if relax_local_neighbour(
                     vertex_index,
                     neighbour_index,
                     edge_weight,
@@ -339,7 +339,7 @@ def process_bucket(
                     )
 
     for vertex_index, neighbour_index, edge_weight in local_heavy_edges:
-        if relax_neighbour(
+        if relax_local_neighbour(
             vertex_index,
             neighbour_index,
             edge_weight,
@@ -388,7 +388,7 @@ def add_to_local_bucket(
     local_bucket.add(vertex_index)
 
 
-def relax_neighbour(
+def relax_local_neighbour(
     vertex_index: int,
     neighbour_index: int,
     edge_weight: float,
