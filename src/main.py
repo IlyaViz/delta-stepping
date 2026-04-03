@@ -17,7 +17,7 @@ if __name__ == "__main__":
     vertex_options = [12_000, 120_000, 1_200_000]
     edge_ratio_options = [1, 5, 10, 25]
     deltas = [0.5, 1, 2, 5, 10]
-    cpu_options = [2, 4, 8, 16]
+    cpu_options = [2, 4, 8, 16, 32]
     min_weight = 1
     max_weight = 100
     retries = 5
