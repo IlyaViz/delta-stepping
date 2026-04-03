@@ -24,6 +24,9 @@ def perform_delta_stepping_analysis(
 ) -> None:
     analysis_start = time.time()
 
+    with open(f"{output_folder}/summary.txt", "w") as f:
+        f.write("")
+
     step_count = (
         len(vertex_options) * len(edge_ratio_options) * len(deltas) * len(cpu_count)
     )
