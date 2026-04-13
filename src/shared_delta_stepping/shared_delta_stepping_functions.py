@@ -54,30 +54,36 @@ def prepare_ndarrays(
         dtype=FLOAT_DTYPE,
         buffer=buffers[1] if buffers else None,
     )
+    shared_previous = ndarray(
+        (vertices_length,),
+        dtype=INT_DTYPE,
+        buffer=buffers[2] if buffers else None,
+    )
     shared_weights = ndarray(
         (vertices_length, max_degree),
         dtype=FLOAT_DTYPE,
-        buffer=buffers[2] if buffers else None,
+        buffer=buffers[3] if buffers else None,
     )
     shared_buckets = ndarray(
         (max_buckets, vertices_length),
         dtype=INT_DTYPE,
-        buffer=buffers[3] if buffers else None,
+        buffer=buffers[4] if buffers else None,
     )
     shared_in_bucket = ndarray(
         (max_buckets, vertices_length),
         dtype=bool,
-        buffer=buffers[4] if buffers else None,
+        buffer=buffers[5] if buffers else None,
     )
     shared_bucket_sizes = ndarray(
         (max_buckets,),
         dtype=INT_DTYPE,
-        buffer=buffers[5] if buffers else None,
+        buffer=buffers[6] if buffers else None,
     )
 
     if set_defaults:
         shared_neighbours.fill(-1)
         shared_distances.fill(float("inf"))
+        shared_previous.fill(-1)
         shared_in_bucket.fill(False)
         shared_bucket_sizes.fill(0)
 
@@ -92,6 +98,7 @@ def prepare_ndarrays(
     return (
         shared_neighbours,
         shared_distances,
+        shared_previous,
         shared_weights,
         shared_buckets,
         shared_in_bucket,

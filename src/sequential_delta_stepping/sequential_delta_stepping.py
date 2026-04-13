@@ -20,14 +20,16 @@ def sequential_delta_stepping(
         delta,
     ) = validate_and_prepare_variables(neighbours, weights, source_vertex_index, delta)
 
-    neighbours, distances, weights, buckets, in_bucket, bucket_sizes = prepare_ndarrays(
-        vertices_length,
-        max_degree,
-        max_buckets,
-        set_defaults=True,
-        neighbours=neighbours,
-        weights=weights,
-        source_vertex_index=source_vertex_index,
+    neighbours, distances, previous, weights, buckets, in_bucket, bucket_sizes = (
+        prepare_ndarrays(
+            vertices_length,
+            max_degree,
+            max_buckets,
+            set_defaults=True,
+            neighbours=neighbours,
+            weights=weights,
+            source_vertex_index=source_vertex_index,
+        )
     )
 
     add_to_bucket(
@@ -52,6 +54,7 @@ def sequential_delta_stepping(
             delta,
             neighbours,
             distances,
+            previous,
             weights,
             buckets,
             in_bucket,
@@ -70,7 +73,7 @@ def sequential_delta_stepping(
                 next_non_empty_bucket_actual_index = actual_index
                 break
 
-    return distances.tolist()
+    return distances.tolist(), previous.tolist()
 
 
 def process_bucket(
@@ -80,6 +83,7 @@ def process_bucket(
     delta: float,
     neighbours: ndarray[INT_TYPE],
     distances: ndarray[FLOAT_TYPE],
+    previous: ndarray[INT_TYPE],
     weights: ndarray[FLOAT_TYPE],
     buckets: ndarray[INT_TYPE],
     in_bucket: ndarray[bool],
@@ -118,6 +122,7 @@ def process_bucket(
                 neighbour_index,
                 edge_weight,
                 distances,
+                previous,
             ):
                 bucket_index = int(distances[neighbour_index] // delta) % max_buckets
 
@@ -139,6 +144,7 @@ def process_bucket(
             neighbour_index,
             edge_weight,
             distances,
+            previous,
         ):
             bucket_index = int(distances[neighbour_index] // delta) % max_buckets
 
@@ -160,11 +166,14 @@ def relax_neighbour(
     neighbour_index: int,
     edge_weight: float,
     distances: ndarray[FLOAT_TYPE],
+    previous: ndarray[INT_TYPE], 
 ) -> bool:
     new_distance = distances[vertex_index] + edge_weight
 
     if new_distance < distances[neighbour_index]:
         distances[neighbour_index] = new_distance
+        previous[neighbour_index] = vertex_index
+
         return True
 
     return False

@@ -19,6 +19,7 @@ buckets_lock_global = None
 
 existing_shm_neighbours = None
 existing_shm_distances = None
+existing_shm_previous = None
 existing_shm_weights = None
 existing_shm_buckets = None
 existing_shm_in_bucket = None
@@ -26,6 +27,7 @@ existing_shm_bucket_sizes = None
 
 neighbours_global = None
 distances_global = None
+previous_global = None
 weights_global = None
 buckets_global = None
 in_bucket_global = None
@@ -59,6 +61,11 @@ def parallel_delta_stepping(
         )
         shm_list.append(shm_distances)
 
+        shm_previous = shared_memory.SharedMemory(
+            create=True, size=vertices_length * INT_DTYPE.itemsize
+        )
+        shm_list.append(shm_previous)
+
         shm_weights = shared_memory.SharedMemory(
             create=True, size=vertices_length * max_degree * FLOAT_DTYPE.itemsize
         )
@@ -83,6 +90,7 @@ def parallel_delta_stepping(
         buffers = [
             shm_neighbours.buf,
             shm_distances.buf,
+            shm_previous.buf,
             shm_weights.buf,
             shm_buckets.buf,
             shm_in_bucket.buf,
@@ -91,6 +99,7 @@ def parallel_delta_stepping(
         (
             _,
             shared_distances,
+            shared_previous,
             _,
             shared_buckets,
             shared_in_bucket,
@@ -126,6 +135,7 @@ def parallel_delta_stepping(
                 buckets_lock,
                 shm_neighbours.name,
                 shm_distances.name,
+                shm_previous.name,
                 shm_weights.name,
                 shm_buckets.name,
                 shm_in_bucket.name,
@@ -186,7 +196,7 @@ def parallel_delta_stepping(
                         next_non_empty_bucket_actual_index = actual_index
                         break
 
-        return shared_distances.tolist()
+        return shared_distances.tolist(), shared_previous.tolist()
 
     except Exception as e:
         print("An error occurred during parallel delta stepping:")
@@ -202,6 +212,7 @@ def init_process(
     buckets_lock: LockType,
     shm_neighbours: str,
     shm_distances: str,
+    shm_previous: str,
     shm_weights: str,
     shm_buckets: str,
     shm_in_bucket: str,
@@ -215,11 +226,14 @@ def init_process(
 
     global existing_shm_neighbours
     global existing_shm_distances
+    global existing_shm_previous
     global existing_shm_weights
     global existing_shm_buckets
     global existing_shm_bucket_sizes
     global existing_shm_in_bucket
+
     global neighbours_global
+    global previous_global
     global distances_global
     global weights_global
     global buckets_global
@@ -231,6 +245,7 @@ def init_process(
 
     existing_shm_neighbours = shared_memory.SharedMemory(name=shm_neighbours)
     existing_shm_distances = shared_memory.SharedMemory(name=shm_distances)
+    existing_shm_previous = shared_memory.SharedMemory(name=shm_previous)
     existing_shm_weights = shared_memory.SharedMemory(name=shm_weights)
     existing_shm_buckets = shared_memory.SharedMemory(name=shm_buckets)
     existing_shm_in_bucket = shared_memory.SharedMemory(name=shm_in_bucket)
@@ -239,6 +254,7 @@ def init_process(
     buffers = [
         existing_shm_neighbours.buf,
         existing_shm_distances.buf,
+        existing_shm_previous.buf,
         existing_shm_weights.buf,
         existing_shm_buckets.buf,
         existing_shm_in_bucket.buf,
@@ -247,6 +263,7 @@ def init_process(
     (
         neighbours_global,
         distances_global,
+        previous_global,
         weights_global,
         buckets_global,
         in_bucket_global,
@@ -264,6 +281,7 @@ def init_process(
 def close_worker_shm() -> None:
     global existing_shm_neighbours
     global existing_shm_distances
+    global existing_shm_previous
     global existing_shm_weights
     global existing_shm_buckets
     global existing_shm_in_bucket
@@ -272,6 +290,7 @@ def close_worker_shm() -> None:
     for shm in [
         existing_shm_neighbours,
         existing_shm_distances,
+        existing_shm_previous,
         existing_shm_weights,
         existing_shm_buckets,
         existing_shm_in_bucket,
@@ -291,6 +310,7 @@ def process_bucket(
 ) -> None:
     local_buckets = {}
     local_distance_updates = {}
+    local_previous_updates = {}
     local_heavy_edges = set()
     vertices_to_process = buckets_global[
         actual_bucket_index, start_vertex_index:end_vertex_index
@@ -329,6 +349,7 @@ def process_bucket(
                     edge_weight,
                     distances_global,
                     local_distance_updates,
+                    local_previous_updates,
                 ):
                     add_to_local_bucket(
                         delta,
@@ -345,6 +366,7 @@ def process_bucket(
             edge_weight,
             distances_global,
             local_distance_updates,
+            local_previous_updates,
         ):
             add_to_local_bucket(
                 delta,
@@ -358,6 +380,7 @@ def process_bucket(
         for vertex_index, new_distance in local_distance_updates.items():
             if new_distance < distances_global[vertex_index]:
                 distances_global[vertex_index] = new_distance
+                previous_global[vertex_index] = local_previous_updates[vertex_index]
 
     with buckets_lock_global:
         for bucket_index, vertices in local_buckets.items():
@@ -394,6 +417,7 @@ def relax_local_neighbour(
     edge_weight: float,
     distances: ndarray[FLOAT_TYPE],
     local_distance_updates: dict[int, float],
+    local_previous_updates: dict[int, int],
 ) -> bool:
     vertex_distance = local_distance_updates.get(vertex_index, distances[vertex_index])
     neighbour_distance = local_distance_updates.get(
@@ -403,6 +427,7 @@ def relax_local_neighbour(
 
     if new_distance < neighbour_distance:
         local_distance_updates[neighbour_index] = new_distance
+        local_previous_updates[neighbour_index] = vertex_index
 
         return True
 

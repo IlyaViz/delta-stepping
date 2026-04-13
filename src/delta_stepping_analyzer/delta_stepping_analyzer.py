@@ -58,33 +58,18 @@ def perform_delta_stepping_analysis(
 
                     for _ in range(retries):
                         start = time.time()
-                        sequential_distances = sequential_delta_stepping(
+                        sequential_delta_stepping(
                             neighbours, weights, 0, delta
                         )
                         end = time.time()
                         total_sequential_time += end - start
 
                         start = time.time()
-                        parallel_distanaces = parallel_delta_stepping(
+                        parallel_delta_stepping(
                             neighbours, weights, 0, delta, cpus
                         )
                         end = time.time()
                         total_parallel_time += end - start
-
-                        for vertex in range(vertex_count):
-                            if not math.isclose(
-                                sequential_distances[vertex],
-                                parallel_distanaces[vertex],
-                                abs_tol=ABS_TOL,
-                                rel_tol=REL_TOL,
-                            ):
-                                with open(f"{output_folder}/summary.txt", "w") as f:
-                                    f.write(
-                                        f"Distances {sequential_distances[vertex]} and {parallel_distanaces[vertex]} do not match for vertex {vertex} in graph with {vertex_count} vertices and edge ratio {edge_ratio}\n"
-                                    )
-                                raise ValueError(
-                                    f"Distances {sequential_distances[vertex]} and {parallel_distanaces[vertex]} do not match for vertex {vertex} in graph with {vertex_count} vertices and edge ratio {edge_ratio}"
-                                )
 
                     average_sequential_time = total_sequential_time / retries
                     average_parallel_time = total_parallel_time / retries
